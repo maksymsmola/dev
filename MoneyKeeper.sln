@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyKeeper.BusinessLogic",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyKeeper.DataAccess", "MoneyKeeper.DataAccess\MoneyKeeper.DataAccess.csproj", "{4E9171C3-CA86-41AF-8FE9-5D0914D1F4BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyKeeper.IocContainer", "MoneyKeeper.IocContainer\MoneyKeeper.IocContainer.csproj", "{F8E4A33C-99E4-461F-B604-C2C259E0C06E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyKeeper.Core", "MoneyKeeper.Core\MoneyKeeper.Core.csproj", "{68A69149-3468-4BBA-9A20-656247056E39}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{4E9171C3-CA86-41AF-8FE9-5D0914D1F4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E9171C3-CA86-41AF-8FE9-5D0914D1F4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E9171C3-CA86-41AF-8FE9-5D0914D1F4BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8E4A33C-99E4-461F-B604-C2C259E0C06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8E4A33C-99E4-461F-B604-C2C259E0C06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8E4A33C-99E4-461F-B604-C2C259E0C06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8E4A33C-99E4-461F-B604-C2C259E0C06E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68A69149-3468-4BBA-9A20-656247056E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68A69149-3468-4BBA-9A20-656247056E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68A69149-3468-4BBA-9A20-656247056E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
