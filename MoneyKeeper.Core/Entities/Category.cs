@@ -6,6 +6,8 @@ namespace MoneyKeeper.Core.Entities
     {
         public string Name { get; set; }
 
+        public FinOperationType Type { get; set; }
+
         public virtual ICollection<FinancialOperation> FinancialOperations { get; set; }
 
         public Category()

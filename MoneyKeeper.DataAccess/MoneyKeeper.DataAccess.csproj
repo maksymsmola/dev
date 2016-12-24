@@ -49,6 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappings\CategoryDbMap.cs" />
+    <Compile Include="Mappings\FinancialOperationDbMap.cs" />
+    <Compile Include="Mappings\TagDbMap.cs" />
+    <Compile Include="Mappings\UserDbMap.cs" />
+    <Compile Include="Migrations\201612241150432_InitialCreate.cs" />
+    <Compile Include="Migrations\201612241150432_InitialCreate.Designer.cs">
+      <DependentUpon>201612241150432_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MoneyKeeperContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +70,11 @@
       <Project>{68A69149-3468-4BBA-9A20-656247056E39}</Project>
       <Name>MoneyKeeper.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612241150432_InitialCreate.resx">
+      <DependentUpon>201612241150432_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

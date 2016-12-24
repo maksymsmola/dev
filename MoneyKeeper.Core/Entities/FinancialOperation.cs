@@ -13,6 +13,12 @@ namespace MoneyKeeper.Core.Entities
 
         public FinOperationType Type { get; set; }
 
+        public long UserId { get; set; }
+
+        public long? CategoryId { get; set; }
+
+        public virtual User User { get; set; }
+
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }

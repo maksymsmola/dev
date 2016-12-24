@@ -16,14 +16,14 @@ namespace MoneyKeeper.Web.IocContainer
 
         public override void ReleaseController(IController controller)
         {
-            container.Release(controller);
+            this.container.Release(controller);
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            if (controllerType != null && container.Kernel.HasComponent(controllerType))
+            if (controllerType != null && this.container.Kernel.HasComponent(controllerType))
             {
-                return (IController)container.Resolve(controllerType);
+                return (IController)this.container.Resolve(controllerType);
             }
 
             return base.GetControllerInstance(requestContext, controllerType);
