@@ -1,0 +1,36 @@
+{
+  "name": "money-keeper",
+  "version": "1.0.0",
+  "description": "Project for tracking your money incomes and expenses",
+  "main": "client/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maksymsmola/dev.git"
+  },
+  "author": "Maksym Smola",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.9",
+    "angular-animate": "^1.5.9",
+    "angular-aria": "^1.5.9",
+    "angular-material": "^1.1.1",
+    "angular-messages": "^1.6.1",
+    "angular-ui-router": "^0.3.2",
+    "clean-webpack-plugin": "^0.1.14",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "ng-annotate": "^1.2.1",
+    "ng-annotate-webpack-plugin": "^0.1.3",
+    "ngtemplate-loader": "^1.3.1",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0"
+  }
+}

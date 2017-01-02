@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.Windsor;
@@ -16,6 +17,12 @@ namespace MoneyKeeper.Web
 
             IWindsorContainer ioc = IocInitializer.Initialize();
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(ioc));
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            HttpApplication context = (HttpApplication)sender;
+            context.Response.SuppressFormsAuthenticationRedirect = true;
         }
     }
 }

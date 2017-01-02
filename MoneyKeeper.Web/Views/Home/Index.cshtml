@@ -1,13 +1,21 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@{ ViewBag.Title = "Home Page"; }
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>This is some title</title>
+    <meta charset="utf-8" />
+    <!--todo: use webpack to get styles from node_modules directory-->
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/client/styles/app.css")" />
 </head>
-<body>
-    <h1>This will be singlpage application</h1>
+
+<body ng-app="app" ng-cloack>
+
+    <ui-view></ui-view>
+
+    <script src="dist/app.js"></script>
 </body>
+
 </html>

@@ -148,6 +148,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="client\modulesDefinition.js" />
+    <Content Include="client\authInterceptor.js" />
+    <Content Include="client\configState.js" />
+    <Content Include="client\app.js" />
+    <Content Include="client\authorization\loginController.js" />
+    <Content Include="client\styles\app.css" />
+    <Content Include="client\views\login.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -160,6 +167,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -169,9 +177,6 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyKeeper.BusinessLogic\MoneyKeeper.BusinessLogic.csproj">
@@ -186,6 +191,9 @@
       <Project>{4e9171c3-ca86-41af-8fe9-5d0914d1f4bc}</Project>
       <Name>MoneyKeeper.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
