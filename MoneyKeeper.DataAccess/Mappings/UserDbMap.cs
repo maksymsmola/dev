@@ -9,6 +9,7 @@ namespace MoneyKeeper.DataAccess.Mappings
         {
             this.Property(user => user.FirstName).HasMaxLength(100);
             this.Property(user => user.LastName).HasMaxLength(100);
+            this.Property(user => user.LoginName).HasMaxLength(100);
         }
     }
 }

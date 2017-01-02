@@ -8,7 +8,7 @@ namespace MoneyKeeper.Core.Entities
 
         public string LastName { get; set; }
 
-        //public string LoginName { get; set; } // todo: add migration
+        public string LoginName { get; set; }
 
         public string HashedPasword { get; set; }
 
