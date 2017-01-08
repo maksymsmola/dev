@@ -64,6 +64,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MoneyKeeperContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
