@@ -1,30 +1,57 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
+using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Services;
+using MoneyKeeper.Web.ActionResults;
+using MoneyKeeper.Web.Extensions;
+using MoneyKeeper.Web.Mappings;
+using MoneyKeeper.Web.Models;
 
 namespace MoneyKeeper.Web.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
-        public JsonResult SignIn(string name , string password)
-        {
-            FormsAuthentication.SetAuthCookie(name, false);
+        private readonly IUserService userService;
 
-            return this.Json(new { success = true });
+        public AccountController(IUserService userService)
+        {
+            this.userService = userService;
+        }
+
+        public CustomJsonResult SignIn(SignInUserModel model)
+        {
+            SimpleUserDto user = this.userService.GetUserByCredentials(model.Name, model.Password);
+
+            if (user == null)
+            {
+                return this.ErrorResult();
+            }
+
+            this.Session.SetCurrentUserId(user.Id);
+            FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe);
+
+            return this.SuccessResult();
         }
 
         [Authorize]
-        public JsonResult SignOut()
+        public CustomJsonResult SignOut()
         {
             FormsAuthentication.SignOut();
             this.Session.Abandon();
 
-            return this.Json(new { sucess = true });
+            return this.SuccessResult();
         }
 
-        public JsonResult SignUp()
+        public CustomJsonResult SignUp(SignUpUserModel model)
         {
-            throw new NotImplementedException();
+            long userId = this.userService.CreateUser(model.ToCreateUserDto());
+
+            this.Session.SetCurrentUserId(userId);
+            FormsAuthentication.SetAuthCookie(model.LoginName, true);
+
+            return this.SuccessResult();
         }
     }
 }

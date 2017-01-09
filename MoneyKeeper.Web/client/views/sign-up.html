@@ -1,0 +1,42 @@
+<div ng-controller="signUpController as ctrl">
+    <section class="box-section auth-section">
+        <form name="signUpForm" class="auth-form" novalidate>
+            <div class="input-wrapper user-name">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>User Name</label>
+                    <input type="text" ng-model="ctrl.model.name" required/>
+                </md-input-container>
+            </div>
+
+            <div class="input-wrapper">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>First Name</label>
+                    <input type="text" ng-model="ctrl.model.firstName" required/>
+                </md-input-container>
+            </div>
+
+            <div class="input-wrapper">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Last Name</label>
+                    <input type="text" ng-model="ctrl.model.lastName" required />
+                </md-input-container>
+            </div>
+
+            <div class="input-wrapper">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Password</label>
+                    <input type="password" ng-model="ctrl.model.password" required/>
+                </md-input-container>
+            </div>
+
+            <div class="input-wrapper">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Confirm password</label>
+                    <input type="password" ng-model="ctrl.model.confirmPassword" required />
+                </md-input-container>
+            </div>
+
+            <md-button class="md-raised" ng-disabled="signUpForm.$invalid" ng-click="ctrl.signUp()">Sign Up</md-button>
+        </form>
+    </section>
+</div>

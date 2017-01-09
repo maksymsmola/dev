@@ -13,9 +13,9 @@ md-input-container.md-block {
     padding-top: 25px;
 }
 
-.login-section {
+.auth-section {
     width: 50%;
-    height: 210px;
+    height: auto;
     margin: auto;
     margin-top: 10px;
 }

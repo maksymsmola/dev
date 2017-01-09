@@ -1,0 +1,22 @@
+<div ng-controller="signInController as ctrl">
+    <section class="box-section auth-section">
+        <form name="signInForm" class="auth-form" novalidate>
+            <div class="input-wrapper user-name">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>User Name</label>
+                    <input type="text" ng-model="ctrl.model.name" required />
+                </md-input-container>
+            </div>
+
+            <div class="input-wrapper">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Password</label>
+                    <input type="password" ng-model="ctrl.model.password" required />
+                </md-input-container>
+            </div>
+
+            <md-button class="md-raised" ng-disabled="signInForm.$invalid" ng-click="ctrl.signIn()">Submit</md-button>
+            Or <a ui-sref="signUp">Sign Up for free</a>
+        </form>
+    </section>
+</div>

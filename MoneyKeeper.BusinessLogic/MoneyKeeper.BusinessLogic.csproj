@@ -40,8 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\CreateUserDto.cs" />
+    <Compile Include="Dto\SimpleUserDto.cs" />
+    <Compile Include="Mappings\UserMappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\Implementations\UserService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MoneyKeeper.Core\MoneyKeeper.Core.csproj">
+      <Project>{68a69149-3468-4bba-9a20-656247056e39}</Project>
+      <Name>MoneyKeeper.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoneyKeeper.DataAccess\MoneyKeeper.DataAccess.csproj">
+      <Project>{4e9171c3-ca86-41af-8fe9-5d0914d1f4bc}</Project>
+      <Name>MoneyKeeper.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

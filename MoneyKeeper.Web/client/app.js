@@ -2,7 +2,8 @@ var angular = require("angular");
 
 require("./modulesDefinition");
 
-require("./authorization/loginController");
+require("./authorization/signInController");
+require("./authorization/signUpController");
 require("./authInterceptor");
 var configState = require("./configState");
 
@@ -16,5 +17,5 @@ app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
   $httpProvider.interceptors.push("authInterceptor");
   $httpProvider.defaults.withCredentials = true;
 }).run(function($state) {
-  $state.go("login");
+  $state.go("signIn");
 });

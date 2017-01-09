@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -136,25 +140,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\CustomJsonResult.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
+    <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IocContainer\IocInitializer.cs" />
     <Compile Include="IocContainer\WindsorControllerFactory.cs" />
+    <Compile Include="Mappings\UserMappings.cs" />
+    <Compile Include="Models\SignInUserModel.cs" />
+    <Compile Include="Models\SignUpUserModel.cs" />
+    <Compile Include="Models\SimpleResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="client\authorization\signInController.js" />
     <Content Include="client\modulesDefinition.js" />
     <Content Include="client\authInterceptor.js" />
     <Content Include="client\configState.js" />
     <Content Include="client\app.js" />
-    <Content Include="client\authorization\loginController.js" />
+    <Content Include="client\authorization\signUpController.js" />
     <Content Include="client\styles\app.css" />
-    <Content Include="client\views\login.html" />
+    <Content Include="client\views\sign-up.html" />
+    <Content Include="client\views\sign-in.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -171,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -1,14 +1,22 @@
-var loginViewTemplate = require("./views/login.html");
+var signInViewTemplate = require("./views/sign-in.html");
+var signUpViewTemplate = require("./views/sign-up.html");
 
 module.exports = function($stateProvider, $urlRouterProvider) {
-  //$urlRouterProvider.otherwise('/home'); // todo: create not found page
+  //$urlRouterProvider.otherwise('/not-found'); // todo: create not found page
 
   var loginState = {
-    name: "login",
-    url: "/login",
-    templateUrl: loginViewTemplate,
-    controller: "loginController"
+    name: "signIn",
+    url: "/sign-in",
+    templateUrl: signInViewTemplate,
+    controller: "signInController"
   };
+
+  var signUpState = {
+    name: "signUp",
+    url: "/sign-up",
+    templateUrl: signUpViewTemplate,
+    controller: "signUpController"
+  }
 
   var homeState = {
     name: "home",
@@ -17,5 +25,6 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   }
 
   $stateProvider.state(loginState);
+  $stateProvider.state(signUpState);
   $stateProvider.state(homeState);
 }

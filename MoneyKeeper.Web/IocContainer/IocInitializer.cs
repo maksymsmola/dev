@@ -1,10 +1,11 @@
-using System;
 using System.Data.Entity;
 using System.Web.Mvc;
-using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using MoneyKeeper.BusinessLogic.Services;
+using MoneyKeeper.BusinessLogic.Services.Implementations;
 using MoneyKeeper.DataAccess;
+using MoneyKeeper.DataAccess.Repository;
 
 namespace MoneyKeeper.Web.IocContainer
 {
@@ -18,13 +19,29 @@ namespace MoneyKeeper.Web.IocContainer
             {
                 Container = new WindsorContainer();
 
-                Container.Register(Classes.FromAssemblyNamed("Elmah.Mvc").BasedOn<IController>().LifestyleTransient());
-                Container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
-
-                Container.Register(Component.For<DbContext>().ImplementedBy<MoneyKeeperContext>().LifeStyle.PerWebRequest);
+                RegisterControllers();
+                RegisterDal();
+                RegisterBl();
             }
 
             return Container;
+        }
+
+        private static void RegisterControllers()
+        {
+            Container.Register(Classes.FromAssemblyNamed("Elmah.Mvc").BasedOn<IController>().LifestyleTransient());
+            Container.Register(Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient());
+        }
+
+        private static void RegisterDal()
+        {
+            Container.Register(Component.For<DbContext>().ImplementedBy<MoneyKeeperContext>().LifeStyle.PerWebRequest);
+            Container.Register(Component.For<IRepository>().ImplementedBy<Repository>().LifeStyle.PerWebRequest);
+        }
+
+        private static void RegisterBl()
+        {
+            Container.Register(Component.For<IUserService>().ImplementedBy<UserService>().LifeStyle.PerWebRequest);
         }
     }
 }

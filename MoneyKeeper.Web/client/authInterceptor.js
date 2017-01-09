@@ -8,7 +8,7 @@ function authInterceptor($location) {
   return {
     responseError: function(response) {
       if (response.status === 401) {
-        $location.path("/login");
+        $location.path("/signIn");
       }
 
       return response;
