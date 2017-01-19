@@ -13,9 +13,9 @@
   "author": "Maksym Smola",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.5.9",
-    "angular-animate": "^1.5.9",
-    "angular-aria": "^1.5.9",
+    "angular": "1.5.9",
+    "angular-animate": "1.5.9",
+    "angular-aria": "1.5.9",
     "angular-material": "^1.1.1",
     "angular-messages": "^1.6.1",
     "angular-ui-router": "^0.3.2",
