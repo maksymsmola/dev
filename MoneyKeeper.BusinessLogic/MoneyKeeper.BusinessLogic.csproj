@@ -41,9 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\CreateUserDto.cs" />
+    <Compile Include="Dto\FinOperationDto.cs" />
     <Compile Include="Dto\SimpleUserDto.cs" />
+    <Compile Include="Mappings\FinOpMapping.cs" />
     <Compile Include="Mappings\UserMappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IFinOperationService.cs" />
+    <Compile Include="Services\Implementations\FinOperationService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\Implementations\UserService.cs" />
   </ItemGroup>

@@ -36,6 +36,17 @@ namespace MoneyKeeper.DataAccess.Repository
             return this.context.Set<T>().Where(criteria).ToList();
         }
 
+        public List<T> GetByCriteriaIncluding<T>(Expression<Func<T, bool>> criteria, params Expression<Func<T, object>>[] include) where T : BaseEntity
+        {
+            IQueryable<T> query = this.context.Set<T>();
+            foreach (Expression<Func<T, object>> expression in include)
+            {
+                query = query.Include(expression);
+            }
+
+            return query.Where(criteria).ToList();
+        }
+
         public void SaveChanges()
         {
             this.context.SaveChanges();

@@ -42,6 +42,7 @@ namespace MoneyKeeper.Web.IocContainer
         private static void RegisterBl()
         {
             Container.Register(Component.For<IUserService>().ImplementedBy<UserService>().LifeStyle.PerWebRequest);
+            Container.Register(Component.For<IFinOperationService>().ImplementedBy<FinOperationService>().LifeStyle.PerWebRequest);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MoneyKeeper.Web.Mappings
         {
             return new CreateUserDto
             {
-                LoginName = signUpModel.LoginName,
+                LoginName = signUpModel.Name,
                 FirstName = signUpModel.FirstName,
                 LastName = signUpModel.LastName,
                 Password = signUpModel.Password

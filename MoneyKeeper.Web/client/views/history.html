@@ -1,1 +1,22 @@
-<div>Hello, hisory state!!!</div>
+<div class="history-tab-content" ng-controller="historyController as historyCtrl">
+    <div class="operations-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Value</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="operation in historyCtrl.operations">
+                    <td>{{operation.type === 1 ? "Income" : "Expense"}}</td>
+                    <td>{{operation.description}}</td>
+                    <td>{{operation.value}}</td>
+                    <td>{{operation.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

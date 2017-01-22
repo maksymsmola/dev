@@ -35,10 +35,10 @@ module.exports = {
   },
   plugins: [
     new Clean([distDir]),
-    new ExtractTextPlugin("main.css"),
-    new NgAnnotatePlugin({
-      add: true
-    }),
+    //new ExtractTextPlugin("main.css"),
+    //new NgAnnotatePlugin({
+    //  add: true
+    //}),
     // todo: add production webpack.config
     //new webpack.optimize.UglifyJsPlugin({
     //  compress: true

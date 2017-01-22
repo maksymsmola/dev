@@ -16,6 +16,8 @@ namespace MoneyKeeper.DataAccess.Repository
 
         List<T> GetByCriteria<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
 
+        List<T> GetByCriteriaIncluding<T>(Expression<Func<T, bool>> criteria, params Expression<Func<T, object>>[] include) where T : BaseEntity;
+
         void SaveChanges();
     }
 }

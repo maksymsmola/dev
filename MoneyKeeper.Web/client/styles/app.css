@@ -19,3 +19,18 @@ md-input-container.md-block {
     margin: auto;
     margin-top: 10px;
 }
+
+
+.actions-block {
+    width: 80%;
+    margin: auto;
+}
+
+.history-tab-content {
+    
+}
+
+.operations-list {
+    width: 80%;
+    margin: auto;
+}

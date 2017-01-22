@@ -5,6 +5,8 @@ require("./modulesDefinition");
 require("./authorization/signInController");
 require("./authorization/signUpController");
 require("./home/homeController");
+require("./history/historyController");
+
 require("./authInterceptor");
 var configState = require("./configState");
 

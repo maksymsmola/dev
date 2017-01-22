@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 using MoneyKeeper.BusinessLogic.Dto;
 using MoneyKeeper.BusinessLogic.Services;
@@ -26,7 +25,7 @@ namespace MoneyKeeper.Web.Controllers
 
             if (user == null)
             {
-                return this.ErrorResult();
+                return this.ErrorResult(); //todo: handle this on client
             }
 
             this.Session.SetCurrentUserId(user.Id);
@@ -49,7 +48,7 @@ namespace MoneyKeeper.Web.Controllers
             long userId = this.userService.CreateUser(model.ToCreateUserDto());
 
             this.Session.SetCurrentUserId(userId);
-            FormsAuthentication.SetAuthCookie(model.LoginName, true);
+            FormsAuthentication.SetAuthCookie(model.Name, true);
 
             return this.SuccessResult();
         }
