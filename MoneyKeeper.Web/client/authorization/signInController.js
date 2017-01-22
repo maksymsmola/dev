@@ -15,7 +15,7 @@ function signInController($http, $state) {
   scope.signIn = function() {
     $http.post("/Account/SignIn", scope.model)
     .then(function() {
-      $state.go("home");
+      $state.transitionTo("home.main");
     });
   }
 }

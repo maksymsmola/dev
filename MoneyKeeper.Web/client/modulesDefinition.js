@@ -6,5 +6,9 @@ require("angular-material");
 require("angular-ui-router");
 
 angular.module("authorization", []);
+angular.module("home", ["ngMaterial"]);
 
-angular.module("app", ["ngAnimate", "ngMaterial", "ngAria", "ui.router", "authorization"]);
+var libsModules = ["ngAnimate", "ngMaterial", "ngAria", "ui.router"];
+var customModules = ["authorization", "home"];
+
+angular.module("app", libsModules.concat(customModules));

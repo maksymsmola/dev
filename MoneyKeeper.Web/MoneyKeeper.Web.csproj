@@ -159,15 +159,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="client\authorization\signInController.js" />
-    <Content Include="client\modulesDefinition.js" />
-    <Content Include="client\authInterceptor.js" />
-    <Content Include="client\configState.js" />
     <Content Include="client\app.js" />
+    <Content Include="client\authInterceptor.js" />
+    <Content Include="client\authorization\signInController.js" />
     <Content Include="client\authorization\signUpController.js" />
+    <Content Include="client\configState.js" />
+    <Content Include="client\home\homeController.js" />
+    <Content Include="client\modulesDefinition.js" />
     <Content Include="client\styles\app.css" />
-    <Content Include="client\views\sign-up.html" />
+    <Content Include="client\views\history.html" />
+    <Content Include="client\views\home.html" />
+    <Content Include="client\views\main.html" />
     <Content Include="client\views\sign-in.html" />
+    <Content Include="client\views\sign-up.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

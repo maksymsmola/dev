@@ -1,5 +1,8 @@
 var signInViewTemplate = require("./views/sign-in.html");
 var signUpViewTemplate = require("./views/sign-up.html");
+var homeViewTemplate = require("./views/home.html");
+var mainViewTemplate = require("./views/main.html");
+var historyViewTemplate = require("./views/history.html");
 
 module.exports = function($stateProvider, $urlRouterProvider) {
   //$urlRouterProvider.otherwise('/not-found'); // todo: create not found page
@@ -7,24 +10,38 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   var loginState = {
     name: "signIn",
     url: "/sign-in",
-    templateUrl: signInViewTemplate,
-    controller: "signInController"
+    templateUrl: signInViewTemplate
   };
 
   var signUpState = {
     name: "signUp",
     url: "/sign-up",
-    templateUrl: signUpViewTemplate,
-    controller: "signUpController"
+    templateUrl: signUpViewTemplate
   }
 
   var homeState = {
     name: "home",
-    url: "/home",
-    template: "<h3>This is home page! Be happy.</h3>"
+    abstract: true,
+    templateUrl: homeViewTemplate
+  }
+
+  var mainState = {
+    name: "home.main",
+    parent: "home",
+    url: "/main",
+    templateUrl: mainViewTemplate
+  }
+
+  var historyState = {
+    name: "home.history",
+    parent: "home",
+    url: "/history",
+    templateUrl: historyViewTemplate
   }
 
   $stateProvider.state(loginState);
   $stateProvider.state(signUpState);
   $stateProvider.state(homeState);
+  $stateProvider.state(mainState);
+  $stateProvider.state(historyState);
 }
