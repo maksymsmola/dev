@@ -5,9 +5,11 @@ require("./modulesDefinition");
 require("./authorization/signInController");
 require("./authorization/signUpController");
 require("./home/homeController");
+require("./finOperationsCrud/addFinOperationController");
 require("./history/historyController");
 
 require("./authInterceptor");
+require("./spinnerInterceptor");
 var configState = require("./configState");
 
 var app = angular.module("app");
@@ -18,6 +20,8 @@ app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
   configState($stateProvider, $urlRouterProvider);
 
   $httpProvider.interceptors.push("authInterceptor");
+  $httpProvider.interceptors.push("spinnerInterceptor");
+
   $httpProvider.defaults.withCredentials = true;
 }).run(function($state) {
   $state.transitionTo("signIn");

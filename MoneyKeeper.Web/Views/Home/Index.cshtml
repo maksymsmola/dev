@@ -15,6 +15,10 @@
 
     <ui-view></ui-view>
 
+    <div class="circular-progress">
+        <md-progress-circular ng-show="isLoading" md-mode="indeterminate" md-diameter="150px"></md-progress-circular>
+    </div>
+
     <script src="dist/app.js"></script>
 </body>
 

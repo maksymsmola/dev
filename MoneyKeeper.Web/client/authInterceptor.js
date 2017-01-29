@@ -2,7 +2,7 @@ var angular = require("angular");
 
 angular.module("app").factory("authInterceptor", authInterceptor);
 
-function authInterceptor($location) {
+function authInterceptor($location, $q) {
   "ngInject";
 
   return {
@@ -11,7 +11,7 @@ function authInterceptor($location) {
         $location.path("/signIn");
       }
 
-      return response;
+      return $q.reject(response);
     }
   }
 }

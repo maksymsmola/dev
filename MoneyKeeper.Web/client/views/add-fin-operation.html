@@ -1,0 +1,23 @@
+<div class="add-fin-operation">
+    <md-content layout-padding class="add-fin-op-form-wrapper">
+        <form name="addForm" novalidate>
+            <md-input-container class="md-block" flex-gt-xs>
+                <h4>Enter date</h4>
+                <md-datepicker ng-required ng-model="addFinOpCtrl.model.date" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs>
+                <label>Enter value</label>
+                <input type="number" ng-required ng-model="addFinOpCtrl.model.value" />
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs>
+                <label>Enter description</label>
+                <textarea ng-model="addFinOpCtrl.model.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <md-button ng-disabled="addForm.$invalid" ng-click="addFinOpCtrl.addFinOperation()">Submit</md-button>
+            <md-button>Cancel</md-button>
+        </form>
+    </md-content>
+</div>

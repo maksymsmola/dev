@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.BusinessLogic.Services;
 using MoneyKeeper.Web.ActionResults;
 using MoneyKeeper.Web.Extensions;
@@ -19,6 +21,14 @@ namespace MoneyKeeper.Web.Controllers
         {
             long userId = this.Session.GetCurrentUserId();
             return this.CustomJson(this.finOperationService.GetAllForUser(userId));
+        }
+
+        [HttpPost]
+        public CustomJsonResult Add(FinOperationDto model)
+        {
+            model.UserId = this.Session.GetCurrentUserId();
+            this.finOperationService.Add(model);
+            return this.SuccessResult();
         }
     }
 }

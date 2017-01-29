@@ -1,4 +1,4 @@
-﻿using MoneyKeeper.BusinessLogic.Dto;
+﻿using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.Core.Entities;
 
 namespace MoneyKeeper.BusinessLogic.Mappings
@@ -14,6 +14,18 @@ namespace MoneyKeeper.BusinessLogic.Mappings
                 Description = finOp.Description,
                 Type = finOp.Type,
                 Value = finOp.Value
+            };
+        }
+
+        public static FinancialOperation ToFinancialOperation(this FinOperationDto dto)
+        {
+            return new FinancialOperation
+            {
+                UserId = dto.UserId,
+                Type = dto.Type,
+                Description = dto.Description,
+                Date = dto.Date,
+                Value = dto.Value
             };
         }
     }

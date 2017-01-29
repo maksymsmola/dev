@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.BusinessLogic.Mappings;
 using MoneyKeeper.Core.Entities;
 using MoneyKeeper.DataAccess.Repository;
@@ -22,6 +22,12 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
                 this.repository.GetByCriteria<FinancialOperation>(finOp => finOp.UserId == userId)
                     .Select(finOp => finOp.ToFinOperationDto())
                     .ToList();
+        }
+
+        public void Add(FinOperationDto model)
+        {
+            this.repository.Add(model.ToFinancialOperation());
+            this.repository.SaveChanges();
         }
     }
 }

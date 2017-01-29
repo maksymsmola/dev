@@ -34,3 +34,16 @@ md-input-container.md-block {
     width: 80%;
     margin: auto;
 }
+
+.add-fin-op-form-wrapper {
+    width: 50%;
+}
+
+.circular-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    margin-top: -75px;
+    margin-left: -75px;
+}
