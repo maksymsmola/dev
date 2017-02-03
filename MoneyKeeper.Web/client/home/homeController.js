@@ -10,4 +10,10 @@ function homeController($scope, $http, $state) {
     originatorEv = ev;
     $mdOpenMenu(ev);
   };
+
+  this.logOut = function() {
+    $http.get("/Account/SignOut").then(function() {
+      $state.transitionTo("signIn");
+    });
+  };
 }

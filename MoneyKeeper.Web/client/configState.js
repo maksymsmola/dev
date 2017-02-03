@@ -25,6 +25,8 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   var homeState = {
     name: "home",
     abstract: true,
+    controller: "homeController",
+    controllerAs: "homeCtrl",
     templateUrl: homeViewTemplate
   };
 
@@ -38,6 +40,8 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   var historyState = {
     name: "home.history",
     parent: "home",
+    controller: "historyController",
+    controllerAs: "historyCtrl",
     url: "/history",
     templateUrl: historyViewTemplate
   };
