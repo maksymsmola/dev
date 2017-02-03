@@ -47,3 +47,7 @@ md-input-container.md-block {
     margin-top: -75px;
     margin-left: -75px;
 }
+
+.actions-header {
+    padding-left: 20px;
+}

@@ -2,7 +2,7 @@ var angular = require("angular");
 
 angular.module("history").controller("historyController", historyController);
 
-function historyController($http) {
+function historyController($http, $scope) {
   "ngInject";
 
   var vm = this;
