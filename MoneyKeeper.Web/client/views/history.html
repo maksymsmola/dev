@@ -1,22 +1,45 @@
 <div class="history-tab-content">
     <div class="operations-list">
-        <table>
-            <thead>
-            <tr>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Value</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="operation in historyCtrl.operations">
-                <td>{{operation.type === 1 ? "Доход" : "Расход"}}</td>
-                <td>{{operation.description}}</td>
-                <td>{{operation.value}}</td>
-                <td>{{operation.date}}</td>
-            </tr>
-            </tbody>
-        </table>
+        <md-table-container>
+            <table md-table>
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column>Тип</th>
+                        <th md-column>Описание</th>
+                        <th md-column>Значение</th>
+                        <th md-column>Дата</th>
+                        <th md-column></th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row ng-repeat="operation in historyCtrl.operations | orderBy : '-date'">
+                        <td md-cell>{{operation.type === 1 ? "Доход" : "Расход"}}</td>
+                        <td md-cell>{{operation.description}}</td>
+                        <td md-cell>{{operation.value}}</td>
+                        <td md-cell>{{toDisplayFormat(operation.date)}}</td>
+                        <td md-cell>
+                            <md-menu>
+                                <md-button class="md-icon-button" aria-label="{{'buttonMore'+$index}}" ng-click="$mdOpenMenu($event)">
+                                    <md-icon md-menu-origin md-svg-icon="node_modules/material-design-icons/navigation/svg/production/ic_more_vert_24px.svg"></md-icon>
+                                </md-button>
+
+                                <md-menu-content width="2">
+                                    <md-menu-item>
+                                        <md-button>
+                                            Редактировать
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>
+                                            Удалить
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
     </div>
 </div>

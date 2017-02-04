@@ -24,5 +24,7 @@ app.config(function($httpProvider, $stateProvider, $urlRouterProvider) {
 
   $httpProvider.defaults.withCredentials = true;
 }).run(function($state) {
+  "ngInject";
+
   $state.transitionTo("signIn");
 });

@@ -4,11 +4,12 @@ require("angular-animate");
 require("angular-aria");
 require("angular-material");
 require("angular-ui-router");
+require("angular-material-data-table");
 
 angular.module("authorization", []);
 angular.module("home", []);
 angular.module("finOperationsCrud", []);
-angular.module("history", []);
+angular.module("history", ["md.data.table"]);
 
 var libsModules = ["ngAnimate", "ngMaterial", "ngAria", "ui.router"];
 var customModules = ["authorization", "home", "history", "finOperationsCrud"];

@@ -160,17 +160,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="client\common\finOperationType.js" />
-    <Content Include="client\spinnerInterceptor.js" />
-    <Content Include="client\finOperationsCrud\addFinOperationController.js" />
     <Content Include="client\app.js" />
     <Content Include="client\authInterceptor.js" />
     <Content Include="client\authorization\signInController.js" />
     <Content Include="client\authorization\signUpController.js" />
+    <Content Include="client\common\finOperationType.js" />
     <Content Include="client\configState.js" />
+    <Content Include="client\finOperationsCrud\addFinOperationController.js" />
     <Content Include="client\history\historyController.js" />
     <Content Include="client\home\homeController.js" />
     <Content Include="client\modulesDefinition.js" />
+    <Content Include="client\services\dateService.js" />
+    <Content Include="client\spinnerInterceptor.js" />
     <Content Include="client\styles\app.css" />
     <Content Include="client\views\add-fin-operation.html" />
     <Content Include="client\views\history.html" />
