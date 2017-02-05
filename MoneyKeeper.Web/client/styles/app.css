@@ -37,6 +37,11 @@ md-input-container.md-block {
 
 .add-fin-op-form-wrapper {
     width: 50%;
+    margin: auto;
+}
+
+.buttons-wrapper {
+    text-align: center;
 }
 
 .circular-progress {

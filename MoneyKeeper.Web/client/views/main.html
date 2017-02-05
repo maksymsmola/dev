@@ -1,14 +1,10 @@
-<div class="actions-block">
-    <md-toolbar>
-        <h3 class="actions-header">Действия</h3>
-    </md-toolbar>
+<div class="money-keeper-content">
+    <md-nav-bar nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-sref="main.home">Главная</md-nav-item>
+        <md-nav-item md-nav-sref="main.history">История</md-nav-item>
+    </md-nav-bar>
 
-    <md-content class="box-section" layout-padding>
-        <md-button class="md-raised" ui-sref="addexpense">
-            <span>Добавить расход</span>
-        </md-button>
-        <md-button class="md-raised" ui-sref="addincome">
-            <span>Добавить доход</span>
-        </md-button>
+    <md-content layout-padding>
+        <ui-view></ui-view>
     </md-content>
 </div>

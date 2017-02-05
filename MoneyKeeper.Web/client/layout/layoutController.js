@@ -1,8 +1,8 @@
 var angular = require("angular");
 
-angular.module("home").controller("homeController", homeController);
+angular.module("app").controller("layoutController", layoutController);
 
-function homeController($scope, $http, $state) {
+function layoutController($scope, $http, $state) {
   "ngInject";
 
   this.logOut = function() {

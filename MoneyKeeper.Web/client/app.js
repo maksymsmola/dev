@@ -4,7 +4,7 @@ require("./modulesDefinition");
 
 require("./authorization/signInController");
 require("./authorization/signUpController");
-require("./home/homeController");
+require("./layout/layoutController");
 require("./finOperationsCrud/addFinOperationController");
 require("./history/historyController");
 

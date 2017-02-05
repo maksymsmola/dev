@@ -16,7 +16,7 @@ function addFinOperationController($state, $http, type) {
 
   this.addFinOperation = function() {
     $http.post("/FinOperation/Add", self.model).then(function() {
-      $state.transitionTo("home.main");
+      $state.transitionTo("main.home");
     });
   };
 }

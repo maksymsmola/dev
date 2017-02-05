@@ -16,8 +16,10 @@
                 <textarea ng-model="addFinOpCtrl.model.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
             </md-input-container>
 
-            <md-button class="md-raised" ng-disabled="addForm.$invalid" ng-click="addFinOpCtrl.addFinOperation()">Добавить</md-button>
-            <md-button class="md-raised">Отмена</md-button>
+            <div class="buttons-wrapper">
+                <md-button class="md-raised md-primary" ng-disabled="addForm.$invalid" ng-click="addFinOpCtrl.addFinOperation()">Добавить</md-button>
+                <md-button class="md-raised">Отмена</md-button>
+            </div>
         </form>
     </md-content>
 </div>

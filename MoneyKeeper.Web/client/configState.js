@@ -2,6 +2,7 @@ var finOpType = require("./common/finOperationType");
 
 var signInViewTemplate = require("./views/sign-in.html");
 var signUpViewTemplate = require("./views/sign-up.html");
+var layoutViewTemplate = require("./views/layout.html");
 var homeViewTemplate = require("./views/home.html");
 var mainViewTemplate = require("./views/main.html");
 var historyViewTemplate = require("./views/history.html");
@@ -19,27 +20,36 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   var signUpState = {
     name: "signUp",
     url: "/sign-up",
+    controller: "signUpController",
+    controllerAs: "signUpCtrl",
     templateUrl: signUpViewTemplate
   };
 
-  var homeState = {
-    name: "home",
+  var layoutState = {
+    name: "layout",
     abstract: true,
-    controller: "homeController",
-    controllerAs: "homeCtrl",
-    templateUrl: homeViewTemplate
+    controller: "layoutController",
+    controllerAs: "layoutCtrl",
+    templateUrl: layoutViewTemplate
   };
 
   var mainState = {
-    name: "home.main",
-    parent: "home",
-    url: "/main",
+    name: "main",
+    abstract: true,
+    parent: "layout",
     templateUrl: mainViewTemplate
   };
 
+  var homeState = {
+    name: "main.home",
+    parent: "main",
+    url: "/home",
+    templateUrl: homeViewTemplate
+  };
+
   var historyState = {
-    name: "home.history",
-    parent: "home",
+    name: "main.history",
+    parent: "main",
     controller: "historyController",
     controllerAs: "historyCtrl",
     url: "/history",
@@ -47,7 +57,8 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   };
 
   var addExpenseState = {
-    name: "addexpense",
+    name: "main.addexpense",
+    parent: "layout",
     url: "/add-expense",
     templateUrl: addFinOperationViewTemplate,
     controller: "addFinOperationController",
@@ -60,7 +71,8 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   };
 
   var addIncomeState = {
-    name: "addincome",
+    name: "main.addincome",
+    parent: "layout",
     url: "/add-income",
     templateUrl: addFinOperationViewTemplate,
     controller: "addFinOperationController",
@@ -74,9 +86,10 @@ module.exports = function($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state(loginState);
   $stateProvider.state(signUpState);
+  $stateProvider.state(layoutState);
+  $stateProvider.state(mainState);
+  $stateProvider.state(homeState);
+  $stateProvider.state(historyState);
   $stateProvider.state(addExpenseState);
   $stateProvider.state(addIncomeState);
-  $stateProvider.state(homeState);
-  $stateProvider.state(mainState);
-  $stateProvider.state(historyState);
 }

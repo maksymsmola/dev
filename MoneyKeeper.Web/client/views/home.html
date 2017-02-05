@@ -1,45 +1,14 @@
-<div>
+<div class="actions-block">
     <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2>
-                <span>Добро пожаловать в Money Keeper!</span>
-            </h2>
-
-            <md-menu md-position-mode="target-right target">
-                <md-button class="md-icon-button" aria-label="MoreVert" ng-click="$mdOpenMenu($event)">
-                    <md-icon md-menu-origin md-svg-icon="node_modules/material-design-icons/navigation/svg/production/ic_more_vert_24px.svg"></md-icon>
-                </md-button>
-
-                <md-menu-content width="4">
-                    <md-menu-item>
-                        <md-button>
-                            Профиль
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button>
-                            Something else
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-divider></md-menu-divider>
-                    <md-menu-item>
-                        <md-button ng-click="homeCtrl.logOut()">
-                            Выйти
-                        </md-button>
-                    </md-menu-item>
-                </md-menu-content>
-            </md-menu>
-        </div>
+        <h3 class="actions-header">Действия</h3>
     </md-toolbar>
 
-    <div class="money-keeper-content">
-        <md-nav-bar nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-sref="home.main">Главная</md-nav-item>
-            <md-nav-item md-nav-sref="home.history">История</md-nav-item>
-        </md-nav-bar>
-
-        <md-content layout-padding>
-            <ui-view></ui-view>
-        </md-content>
-    </div>
+    <md-content class="box-section" layout-padding>
+        <md-button class="md-raised" ui-sref="main.addexpense">
+            <span>Добавить расход</span>
+        </md-button>
+        <md-button class="md-raised" ui-sref="main.addincome">
+            <span>Добавить доход</span>
+        </md-button>
+    </md-content>
 </div>
