@@ -13,7 +13,8 @@ namespace MoneyKeeper.BusinessLogic.Mappings
                 Date = finOp.Date,
                 Description = finOp.Description,
                 Type = finOp.Type,
-                Value = finOp.Value
+                Value = finOp.Value,
+                CategoryName = finOp.Category?.Name
             };
         }
 
@@ -22,6 +23,7 @@ namespace MoneyKeeper.BusinessLogic.Mappings
             return new FinancialOperation
             {
                 UserId = dto.UserId,
+                CategoryId = dto.CategoryId,
                 Type = dto.Type,
                 Description = dto.Description,
                 Date = dto.Date,

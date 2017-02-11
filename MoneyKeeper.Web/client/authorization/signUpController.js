@@ -2,7 +2,7 @@ var angular = require("angular");
 
 angular.module("authorization").controller("signUpController", signUpController);
 
-function signUpController($http, $state) {
+function signUpController($http, fetchCategories) {
   "ngInject";
 
   var scope = this;
@@ -16,9 +16,6 @@ function signUpController($http, $state) {
   };
 
   scope.signUp = function() {
-    $http.post("/Account/SignUp", scope.model)
-      .then(function() {
-        $state.go("main.home");
-      });
+    $http.post("/Account/SignUp", scope.model).then(fetchCategories);
   }
 }

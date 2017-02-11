@@ -145,6 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FinOperationController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
@@ -164,7 +165,9 @@
     <Content Include="client\authInterceptor.js" />
     <Content Include="client\authorization\signInController.js" />
     <Content Include="client\authorization\signUpController.js" />
+    <Content Include="client\common\fetchCategories.js" />
     <Content Include="client\common\finOperationType.js" />
+    <Content Include="client\configCalendar.js" />
     <Content Include="client\configState.js" />
     <Content Include="client\finOperationsCrud\addFinOperationController.js" />
     <Content Include="client\history\historyController.js" />

@@ -5,6 +5,16 @@
                 <h4>Дата</h4>
                 <md-datepicker ng-required ng-model="addFinOpCtrl.model.date" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
             </md-input-container>
+            
+            <md-input-container class="md-block dropdown" flex-gt-xs>
+                <label>Категория</label>
+                <md-select ng-model="addFinOpCtrl.model.categoryId">
+                    <md-option ng-value="{{null}}"><em>Без категории</em></md-option>
+                    <md-option ng-repeat="category in addFinOpCtrl.categories" ng-value="category.id">
+                        {{category.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
 
             <md-input-container class="md-block" flex-gt-xs>
                 <label>Сумма</label>

@@ -9,6 +9,10 @@ md-input-container.md-block {
     margin: auto;
 }
 
+md-input-container.md-block.dropdown {
+    height: 58px;
+}
+
 .auth-form .user-name {
     padding-top: 25px;
 }

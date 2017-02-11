@@ -2,17 +2,20 @@ var angular = require("angular");
 
 angular.module("finOperationsCrud").controller("addFinOperationController", addFinOperationController);
 
-function addFinOperationController($state, $http, type) {
+function addFinOperationController($state, $http, type, categories) {
   "ngInject";
 
   var self = this;
 
   this.model = {
     date: new Date(),
-    value: 0.0,
+    value: null,
     description: "",
-    type: type
+    type: type,
+    categoryId: null
   };
+
+  this.categories = categories[type];
 
   this.addFinOperation = function() {
     $http.post("/FinOperation/Add", self.model).then(function() {
