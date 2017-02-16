@@ -5,7 +5,7 @@
                 <h4>Дата</h4>
                 <md-datepicker ng-required ng-model="addFinOpCtrl.model.date" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
             </md-input-container>
-            
+
             <md-input-container class="md-block dropdown" flex-gt-xs>
                 <label>Категория</label>
                 <md-select ng-model="addFinOpCtrl.model.categoryId">
@@ -24,6 +24,29 @@
             <md-input-container class="md-block" flex-gt-xs>
                 <label>Описание</label>
                 <textarea ng-model="addFinOpCtrl.model.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-xs>
+                <label>Tags</label>
+                <md-chips
+                    ng-model="addFinOpCtrl.model.tags"
+                    md-autocomplete-snap
+                    md-transform-chip="addFinOpCtrl.transformChip($chip)">
+                    <md-autocomplete
+                        md-selected-item="addFinOpCtrl.selectedTag"
+                        md-search-text="addFinOpCtrl.searchTagText"
+                        md-items="item in addFinOpCtrl.queryTags(addFinOpCtrl.searchTagText)"
+                        md-item-text="item.name">
+                        <span>
+                            {{item.name}}
+                        </span>
+                    </md-autocomplete>
+                    <md-chip-template>
+                        <span>
+                            <strong>{{$chip.name}}</strong>
+                        </span>
+                    </md-chip-template>
+                </md-chips>
             </md-input-container>
 
             <div class="buttons-wrapper">

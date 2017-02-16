@@ -9,6 +9,7 @@
                         <th md-column>Значение</th>
                         <th md-column>Дата</th>
                         <th md-column>Категория</th>
+                        <th md-column>Tags</th>
                         <th md-column></th>
                     </tr>
                 </thead>
@@ -20,8 +21,13 @@
                         <td md-cell>{{toDisplayFormat(operation.date)}}</td>
                         <td md-cell>{{operation.categoryName ? operation.categoryName : '-'}}</td>
                         <td md-cell>
+                            <div ng-repeat="tag in operation.tags">
+                                <span>{{tag.name}},</span>
+                            </div>
+                        </td>
+                        <td md-cell>
                             <md-menu>
-                                <md-button class="md-icon-button" aria-label="{{'buttonMore'+$index}}" ng-click="$mdOpenMenu($event)">
+                                <md-button class="md-icon-button" aria-label="{{'buttonMore'+$index}}" ng-click="$mdMenu.open($event)">
                                     <md-icon md-menu-origin md-svg-icon="node_modules/material-design-icons/navigation/svg/production/ic_more_vert_24px.svg"></md-icon>
                                 </md-button>
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using MoneyKeeper.BusinessLogic.Dto.Tags;
 using MoneyKeeper.Core.Entities;
 
 namespace MoneyKeeper.BusinessLogic.Dto.FinancialOperation
@@ -20,5 +22,12 @@ namespace MoneyKeeper.BusinessLogic.Dto.FinancialOperation
         public FinOperationType Type { get; set; }
 
         public double Value { get; set; }
+
+        public List<SimpleTagDto> Tags { get; set; }
+
+        public FinOperationDto()
+        {
+            this.Tags = new List<SimpleTagDto>();
+        }
     }
 }

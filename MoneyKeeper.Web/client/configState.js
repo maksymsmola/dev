@@ -66,6 +66,11 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     resolve: {
       type: function() {
         return finOpType.expense;
+      },
+      tags: function($http) {
+        "ngInject";
+
+        return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
       }
     }
   };

@@ -1,4 +1,5 @@
-﻿using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
+﻿using System.Linq;
+using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.Core.Entities;
 
 namespace MoneyKeeper.BusinessLogic.Mappings
@@ -14,7 +15,8 @@ namespace MoneyKeeper.BusinessLogic.Mappings
                 Description = finOp.Description,
                 Type = finOp.Type,
                 Value = finOp.Value,
-                CategoryName = finOp.Category?.Name
+                CategoryName = finOp.Category?.Name,
+                Tags = finOp.Tags.Select(tag => tag.ToSimpleTagDto()).ToList()
             };
         }
 
