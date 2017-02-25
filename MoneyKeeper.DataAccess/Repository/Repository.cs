@@ -31,6 +31,11 @@ namespace MoneyKeeper.DataAccess.Repository
             this.context.Set<T>().Add(entity);
         }
 
+        public void AddRange<T>(List<T> entities) where T : BaseEntity
+        {
+            this.context.Set<T>().AddRange(entities);
+        }
+
         public List<T> GetByCriteria<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity
         {
             return this.context.Set<T>().Where(criteria).ToList();

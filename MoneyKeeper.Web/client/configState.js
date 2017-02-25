@@ -14,7 +14,12 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   var loginState = {
     name: "signIn",
     url: "/sign-in",
-    templateUrl: signInViewTemplate
+    templateUrl: signInViewTemplate,
+    resolve: {
+      $title: function() {
+        return "Вход";
+      }
+    }
   };
 
   var signUpState = {
@@ -22,7 +27,12 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     url: "/sign-up",
     controller: "signUpController",
     controllerAs: "signUpCtrl",
-    templateUrl: signUpViewTemplate
+    templateUrl: signUpViewTemplate,
+    resolve: {
+      $title: function() {
+        return "Регистрация";
+      }
+    }
   };
 
   var layoutState = {
@@ -44,7 +54,12 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     name: "main.home",
     parent: "main",
     url: "/home",
-    templateUrl: homeViewTemplate
+    templateUrl: homeViewTemplate,
+    resolve: {
+      $title: function() {
+        return "Домашняя страница";
+      }
+    }
   };
 
   var historyState = {
@@ -53,7 +68,12 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     controller: "historyController",
     controllerAs: "historyCtrl",
     url: "/history",
-    templateUrl: historyViewTemplate
+    templateUrl: historyViewTemplate,
+    resolve: {
+      $title: function() {
+        return "История";
+      }
+    }
   };
 
   var addExpenseState = {
@@ -64,6 +84,9 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     controller: "addFinOperationController",
     controllerAs: "addFinOpCtrl",
     resolve: {
+      $title: function() {
+        return "Добавить расход";
+      },
       type: function() {
         return finOpType.expense;
       },
@@ -83,6 +106,9 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     controller: "addFinOperationController",
     controllerAs: "addFinOpCtrl",
     resolve: {
+      $title: function() {
+        return "Добавить доход";
+      },
       type: function() {
         return finOpType.income;
       },

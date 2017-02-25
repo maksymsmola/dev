@@ -1,5 +1,6 @@
 var angular = require("angular");
 var dateService = require("./../services/dateService");
+var _ = require("underscore");
 
 angular.module("history").controller("historyController", historyController);
 
@@ -11,6 +12,14 @@ function historyController($http, $scope) {
   var vm = this;
 
   this.operations = [];
+
+  this.formatTags = function(tags) {
+    var tagsNams =  _.map(tags, function(tag) {
+      return tag.name;
+    });
+
+    return tagsNams.join(", ");
+  };
 
   loadOperations();
 

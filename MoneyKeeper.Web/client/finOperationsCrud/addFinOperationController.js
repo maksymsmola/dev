@@ -11,6 +11,7 @@ function addFinOperationController($state, $http, type, categories, tags) {
   this.model = {
     date: new Date(),
     value: null,
+    amount: 1,
     description: "",
     type: type,
     categoryId: null,
@@ -21,6 +22,10 @@ function addFinOperationController($state, $http, type, categories, tags) {
 
   this.selectedTag = null;
   this.searchTagText = null;
+
+  this.cancel = function() {
+    $state.transitionTo("main.home");
+  };
 
   this.addFinOperation = function() {
     $http.post("/FinOperation/Add", self.model).then(function() {
@@ -34,7 +39,7 @@ function addFinOperationController($state, $http, type, categories, tags) {
     }
 
     return { id: null, name: chip };
-  }
+  };
 
   this.queryTags = function(query) {
     var queryLowerCase = angular.lowercase(query);

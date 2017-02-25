@@ -29,23 +29,30 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
         {
             FinancialOperation finOperation = model.ToFinancialOperation();
 
-            long[] existingTagsIds = model.Tags.Where(tag => tag.Id.HasValue).Select(tag => tag.Id.Value).ToArray();
-            IEnumerable<SimpleTagDto> newTagsNames = model.Tags.Where(tag => !tag.Id.HasValue);
+            List<Tag> tags = this.ExtractNewTags(model);
+            tags.AddRange(this.ExtractExistingTags(model.Tags));
 
-            List<Tag> existingTags = this.repository.GetByCriteria<Tag>(tag => existingTagsIds.Contains(tag.Id)).ToList();
+            finOperation.Tags = tags;
 
-            foreach (Tag existingTag in existingTags)
-            {
-                finOperation.Tags.Add(existingTag);
-            }
-
-            foreach (SimpleTagDto newTag in newTagsNames)
-            {
-                finOperation.Tags.Add(newTag.ToTag(model.UserId));
-            }
-
-            this.repository.Add(finOperation);
+            this.repository.AddRange(finOperation.Clone(model.Amount));
             this.repository.SaveChanges();
+        }
+
+        private List<Tag> ExtractNewTags(AddEditFinOperationDto model)
+        {
+            return 
+                model.Tags.
+                    Where(tag => !tag.Id.HasValue)
+                    .Select(tagDto => tagDto.ToTag(model.UserId))
+                    .ToList();
+        }
+
+        private List<Tag> ExtractExistingTags(List<SimpleTagDto> tags)
+        {
+            long[] existingTagsIds =
+                tags.Where(tag => tag.Id.HasValue).Select(tag => tag.Id.Value).ToArray();
+
+            return this.repository.GetByCriteria<Tag>(tag => existingTagsIds.Contains(tag.Id)).ToList();
         }
     }
 }

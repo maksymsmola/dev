@@ -11,6 +11,7 @@ require("./common/fetchCategories");
 
 require("./authInterceptor");
 require("./spinnerInterceptor");
+
 var configState = require("./configState");
 var configCalendar = require("./configCalendar");
 
