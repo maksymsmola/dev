@@ -38,6 +38,17 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             this.repository.SaveChanges();
         }
 
+        public void Delete(long id)
+        {
+            var finOperation = this.repository.FindById<FinancialOperation>(id);
+
+            finOperation.Tags.Clear();
+            finOperation.CategoryId = null;
+
+            this.repository.Delete(finOperation);
+            this.repository.SaveChanges();
+        }
+
         private List<Tag> ExtractNewTags(AddEditFinOperationDto model)
         {
             return 

@@ -29,5 +29,13 @@ namespace MoneyKeeper.Web.Controllers
             this.finOperationService.Add(model);
             return this.SuccessResult();
         }
+
+        [HttpPost]
+        public CustomJsonResult Delete(long id)
+        {
+            this.finOperationService.Delete(id);
+
+            return this.SuccessResult();
+        }
     }
 }

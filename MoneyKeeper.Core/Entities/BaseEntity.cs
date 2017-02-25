@@ -1,7 +1,7 @@
 ﻿namespace MoneyKeeper.Core.Entities
 {
-    public abstract class BaseEntity
+    public class BaseEntity
     {
-        public long Id { get; protected internal set; }
+        public long Id { get; set; }
     }
 }

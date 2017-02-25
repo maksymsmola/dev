@@ -16,6 +16,10 @@ namespace MoneyKeeper.DataAccess.Repository
 
         void AddRange<T>(List<T> entities) where T : BaseEntity;
 
+        void DeleteById<T>(long id) where T : BaseEntity, new();
+
+        void Delete<T>(T entity) where T : BaseEntity;
+
         List<T> GetByCriteria<T>(Expression<Func<T, bool>> criteria) where T : BaseEntity;
 
         List<T> GetByCriteriaIncluding<T>(Expression<Func<T, bool>> criteria, params Expression<Func<T, object>>[] include) where T : BaseEntity;

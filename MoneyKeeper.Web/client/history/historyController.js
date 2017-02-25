@@ -21,6 +21,16 @@ function historyController($http, $scope) {
     return tagsNams.join(", ");
   };
 
+  this.delete = function(id) {
+    $http.post("/FinOperation/Delete", { id: id })
+      .then(function(response) {
+        if(response.data.success) {
+          //todo: add immutable to remove deleted item from client instead of fetching all items again
+          loadOperations();
+        }
+      });
+  };
+
   loadOperations();
 
   function loadOperations() {

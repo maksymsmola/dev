@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MoneyKeeper.BusinessLogic.Dto;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 
 namespace MoneyKeeper.BusinessLogic.Services
@@ -9,5 +8,7 @@ namespace MoneyKeeper.BusinessLogic.Services
         List<FinOperationListItemDto> GetAllForUser(long userId);
 
         void Add(AddEditFinOperationDto model);
+
+        void Delete(long id);
     }
 }
