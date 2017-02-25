@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Dto.User;
 using MoneyKeeper.BusinessLogic.Services;
 using MoneyKeeper.Web.ActionResults;
 using MoneyKeeper.Web.Extensions;

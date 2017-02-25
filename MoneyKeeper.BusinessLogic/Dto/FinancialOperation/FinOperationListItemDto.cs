@@ -5,13 +5,9 @@ using MoneyKeeper.Core.Entities;
 
 namespace MoneyKeeper.BusinessLogic.Dto.FinancialOperation
 {
-    public class FinOperationDto
+    public class FinOperationListItemDto
     {
         public long Id { get; set; }
-
-        public long? CategoryId { get; set; }
-
-        public long UserId { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -25,7 +21,7 @@ namespace MoneyKeeper.BusinessLogic.Dto.FinancialOperation
 
         public List<SimpleTagDto> Tags { get; set; }
 
-        public FinOperationDto()
+        public FinOperationListItemDto()
         {
             this.Tags = new List<SimpleTagDto>();
         }

@@ -6,9 +6,9 @@ namespace MoneyKeeper.BusinessLogic.Mappings
 {
     internal static class FinOpMapping
     {
-        public static FinOperationDto ToFinOperationDto(this FinancialOperation finOp)
+        public static FinOperationListItemDto ToFinOperationListItemDto(this FinancialOperation finOp)
         {
-            return new FinOperationDto
+            return new FinOperationListItemDto
             {
                 Id = finOp.Id,
                 Date = finOp.Date,
@@ -20,7 +20,7 @@ namespace MoneyKeeper.BusinessLogic.Mappings
             };
         }
 
-        public static FinancialOperation ToFinancialOperation(this FinOperationDto dto)
+        public static FinancialOperation ToFinancialOperation(this AddEditFinOperationDto dto)
         {
             return new FinancialOperation
             {

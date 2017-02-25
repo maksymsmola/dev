@@ -1,4 +1,5 @@
 using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Dto.User;
 
 namespace MoneyKeeper.BusinessLogic.Services
 {

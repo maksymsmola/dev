@@ -1,4 +1,5 @@
 ﻿using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Dto.User;
 using MoneyKeeper.Web.Models;
 
 namespace MoneyKeeper.Web.Mappings

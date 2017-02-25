@@ -41,9 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\Categories\GeneralCategoryDto.cs" />
-    <Compile Include="Dto\CreateUserDto.cs" />
-    <Compile Include="Dto\FinancialOperation\FinOperationDto.cs" />
-    <Compile Include="Dto\SimpleUserDto.cs" />
+    <Compile Include="Dto\FinancialOperation\AddEditFinOperationDto.cs" />
+    <Compile Include="Dto\User\CreateUserDto.cs" />
+    <Compile Include="Dto\FinancialOperation\FinOperationListItemDto.cs" />
+    <Compile Include="Dto\User\SimpleUserDto.cs" />
     <Compile Include="Mappings\CategoryMapping.cs" />
     <Compile Include="Mappings\FinOpMapping.cs" />
     <Compile Include="Mappings\TagsMapping.cs" />

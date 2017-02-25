@@ -6,8 +6,8 @@ namespace MoneyKeeper.BusinessLogic.Services
 {
     public interface IFinOperationService
     {
-        List<FinOperationDto> GetAllForUser(long userId);
+        List<FinOperationListItemDto> GetAllForUser(long userId);
 
-        void Add(FinOperationDto model);
+        void Add(AddEditFinOperationDto model);
     }
 }

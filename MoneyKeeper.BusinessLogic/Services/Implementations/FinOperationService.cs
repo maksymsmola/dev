@@ -17,15 +17,15 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             this.repository = repository;
         }
 
-        public List<FinOperationDto> GetAllForUser(long userId)
+        public List<FinOperationListItemDto> GetAllForUser(long userId)
         {
             return
                 this.repository.GetByCriteria<FinancialOperation>(finOp => finOp.UserId == userId)
-                    .Select(finOp => finOp.ToFinOperationDto())
+                    .Select(finOp => finOp.ToFinOperationListItemDto())
                     .ToList();
         }
 
-        public void Add(FinOperationDto model)
+        public void Add(AddEditFinOperationDto model)
         {
             FinancialOperation finOperation = model.ToFinancialOperation();
 

@@ -1,4 +1,5 @@
 ﻿using MoneyKeeper.BusinessLogic.Dto;
+using MoneyKeeper.BusinessLogic.Dto.User;
 using MoneyKeeper.BusinessLogic.Mappings;
 using MoneyKeeper.Core.Entities;
 using MoneyKeeper.Core.Extensions;

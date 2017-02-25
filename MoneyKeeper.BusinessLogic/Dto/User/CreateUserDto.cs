@@ -1,4 +1,4 @@
-﻿namespace MoneyKeeper.BusinessLogic.Dto
+﻿namespace MoneyKeeper.BusinessLogic.Dto.User
 {
     public class CreateUserDto
     {
