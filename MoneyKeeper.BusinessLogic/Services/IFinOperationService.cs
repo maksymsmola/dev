@@ -9,6 +9,10 @@ namespace MoneyKeeper.BusinessLogic.Services
 
         void Add(AddEditFinOperationDto model);
 
+        AddEditFinOperationDto GetForCrud(long id);
+
+        void Edit(AddEditFinOperationDto model);
+
         void Delete(long id);
     }
 }

@@ -1,4 +1,5 @@
 var finOpType = require("./common/finOperationType");
+var finOpCrudType = require("./common/finOpCrudType");
 
 var signInViewTemplate = require("./views/sign-in.html");
 var signUpViewTemplate = require("./views/sign-up.html");
@@ -77,7 +78,7 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   };
 
   var addExpenseState = {
-    name: "main.addexpense",
+    name: "addexpense",
     parent: "layout",
     url: "/add-expense",
     templateUrl: addFinOperationViewTemplate,
@@ -87,19 +88,33 @@ module.exports = function($stateProvider, $urlRouterProvider) {
       $title: function() {
         return "Добавить расход";
       },
-      type: function() {
+      finOpType: function() {
         return finOpType.expense;
       },
       tags: function($http) {
         "ngInject";
 
         return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
+      },
+      crudType: function() {
+        return finOpCrudType.add
+      },
+      model: function() {
+        return {
+          date: new Date(),
+          value: null,
+          amount: 1,
+          description: "",
+          type: finOpType.expense,
+          categoryId: null,
+          tags: []
+        };
       }
     }
   };
 
   var addIncomeState = {
-    name: "main.addincome",
+    name: "addincome",
     parent: "layout",
     url: "/add-income",
     templateUrl: addFinOperationViewTemplate,
@@ -109,13 +124,101 @@ module.exports = function($stateProvider, $urlRouterProvider) {
       $title: function() {
         return "Добавить доход";
       },
-      type: function() {
+      finOpType: function() {
         return finOpType.income;
       },
       tags: function($http) {
         "ngInject";
 
         return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
+      },
+      crudType: function() {
+        return finOpCrudType.add
+      },
+      model: function() {
+        return {
+          date: new Date(),
+          value: null,
+          amount: 1,
+          description: "",
+          type: finOpType.income,
+          categoryId: null,
+          tags: []
+        };
+      }
+    }
+  };
+
+  var editExpenseState = {
+    name: "editexpense",
+    parent: "layout",
+    url: "/edit-expense/:id",
+    templateUrl: addFinOperationViewTemplate,
+    controller: "addFinOperationController",
+    controllerAs: "addFinOpCtrl",
+    resolve: {
+      $title: function() {
+        return "Редактировать расход";
+      },
+      finOpType: function() {
+        return finOpType.expense;
+      },
+      crudType: function() {
+        return finOpCrudType.edit;
+      },
+      tags: function($http) {
+        "ngInject";
+
+        return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
+      },
+      model: function($http, $stateParams) {
+        "ngInject";
+
+        return $http.get("/FinOperation/GetForCrud?id=" + $stateParams.id)
+          .then(function(result) {
+            var model = result.data;
+
+            model.date = new Date(model.date);
+
+            return model;
+          });
+      }
+    }
+  };
+
+  var editIncomeState = {
+    name: "editincome",
+    parent: "layout",
+    url: "/edit-income/:id",
+    templateUrl: addFinOperationViewTemplate,
+    controller: "addFinOperationController",
+    controllerAs: "addFinOpCtrl",
+    resolve: {
+      $title: function() {
+        return "Редактировать доход";
+      },
+      finOpType: function() {
+        return finOpType.income;
+      },
+      crudType: function() {
+        return finOpCrudType.edit;
+      },
+      tags: function($http) {
+        "ngInject";
+
+        return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
+      },
+      model: function($http, $stateParams) {
+        "ngInject";
+
+        return $http.get("/FinOperation/GetForCrud?id=" + $stateParams.id)
+          .then(function(result) {
+            var model = result.data;
+
+            model.date = new Date(model.date);
+
+            return model;
+          });
       }
     }
   };
@@ -128,4 +231,6 @@ module.exports = function($stateProvider, $urlRouterProvider) {
   $stateProvider.state(historyState);
   $stateProvider.state(addExpenseState);
   $stateProvider.state(addIncomeState);
-}
+  $stateProvider.state(editExpenseState);
+  $stateProvider.state(editIncomeState);
+};

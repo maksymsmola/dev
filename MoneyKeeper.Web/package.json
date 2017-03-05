@@ -4,7 +4,6 @@
   "description": "Project for tracking your money incomes and expenses",
   "main": "client/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node \"node_modules\\webpack\\bin\\webpack.js\""
   },
   "repository": {

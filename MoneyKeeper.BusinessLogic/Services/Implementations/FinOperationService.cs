@@ -38,6 +38,38 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             this.repository.SaveChanges();
         }
 
+        public AddEditFinOperationDto GetForCrud(long id)
+        {
+            return
+                this.repository.GetByCriteriaIncluding<FinancialOperation>(
+                        finOp => finOp.Id == id,
+                        finOp => finOp.Tags)
+                    .First()
+                    .ToAddEditFinOperationDto();
+        }
+
+        public void Edit(AddEditFinOperationDto model)
+        {
+            var targetFinOperation = this.repository.FindById<FinancialOperation>(model.Id);
+
+            targetFinOperation.Value = model.Value;
+            targetFinOperation.Date = model.Date;
+            targetFinOperation.Description = model.Description;
+            targetFinOperation.CategoryId = model.CategoryId;
+
+            targetFinOperation.Tags.Clear();
+
+            List<Tag> tags = this.ExtractNewTags(model);
+            tags.AddRange(this.ExtractExistingTags(model.Tags));
+
+            foreach (Tag tag in tags)
+            {
+                targetFinOperation.Tags.Add(tag);
+            }
+
+            this.repository.SaveChanges();
+        }
+
         public void Delete(long id)
         {
             var finOperation = this.repository.FindById<FinancialOperation>(id);
@@ -51,7 +83,7 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
 
         private List<Tag> ExtractNewTags(AddEditFinOperationDto model)
         {
-            return 
+            return
                 model.Tags.
                     Where(tag => !tag.Id.HasValue)
                     .Select(tagDto => tagDto.ToTag(model.UserId))

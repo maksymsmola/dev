@@ -32,5 +32,19 @@ namespace MoneyKeeper.BusinessLogic.Mappings
                 Value = dto.Value
             };
         }
+
+        public static AddEditFinOperationDto ToAddEditFinOperationDto(this FinancialOperation finOp)
+        {
+            return new AddEditFinOperationDto
+            {
+                Id = finOp.Id,
+                Date = finOp.Date,
+                Description = finOp.Description,
+                CategoryId = finOp.CategoryId,
+                Type = finOp.Type,
+                Value = finOp.Value,
+                Tags = finOp.Tags.Select(tag => tag.ToSimpleTagDto()).ToList()
+            };
+        }
     }
 }

@@ -7,8 +7,8 @@
                     <th md-column>Тип</th>
                     <th md-column>Дата</th>
                     <th md-column>Значение</th>
-                    <th md-column>Категория</th>
                     <th md-column>Описание</th>
+                    <th md-column>Категория</th>
                     <th md-column>Ярлыки</th>
                     <th md-column></th>
                 </tr>
@@ -35,7 +35,7 @@
 
                             <md-menu-content width="2">
                                 <md-menu-item>
-                                    <md-button>
+                                    <md-button ui-sref="{{operation.type === 1 ? 'editincome({id: '+operation.id+'})' : 'editexpense({id: '+operation.id+'})'}}">
                                         Редактировать
                                     </md-button>
                                 </md-menu-item>

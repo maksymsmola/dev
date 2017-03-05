@@ -1,24 +1,24 @@
 var angular = require("angular");
 var _ = require("underscore");
+var finOpTypeEnum = require("../common/finOperationType");
+var finOpCrudType = require("../common/finOpCrudType");
 
 angular.module("finOperationsCrud").controller("addFinOperationController", addFinOperationController);
 
-function addFinOperationController($state, $http, type, categories, tags) {
+function addFinOperationController($scope, $state, $http, finOpType, categories, tags, crudType, model) {
   "ngInject";
+
+  $scope.finOpTypeEnum = finOpTypeEnum;
+  $scope.finOpCrudType = finOpCrudType;
 
   var self = this;
 
-  this.model = {
-    date: new Date(),
-    value: null,
-    amount: 1,
-    description: "",
-    type: type,
-    categoryId: null,
-    tags: []
-  };
+  this.model = model;
+  
+  this.crudType = crudType;
+  this.finOpType = finOpType;
 
-  this.categories = categories[type];
+  this.categories = categories[finOpType];
 
   this.selectedTag = null;
   this.searchTagText = null;
@@ -30,6 +30,12 @@ function addFinOperationController($state, $http, type, categories, tags) {
   this.addFinOperation = function() {
     $http.post("/FinOperation/Add", self.model).then(function() {
       $state.transitionTo("main.home");
+    });
+  };
+
+  this.editFinOperation = function() {
+    $http.post("/FinOperation/Edit", self.model).then(function() {
+      $state.transitionTo("main.history");
     });
   };
 

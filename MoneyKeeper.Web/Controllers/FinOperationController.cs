@@ -30,6 +30,20 @@ namespace MoneyKeeper.Web.Controllers
             return this.SuccessResult();
         }
 
+        [HttpGet]
+        public CustomJsonResult GetForCrud(long id)
+        {
+            return this.CustomJson(this.finOperationService.GetForCrud(id));
+        }
+
+        [HttpPost]
+        public CustomJsonResult Edit(AddEditFinOperationDto model)
+        {
+            model.UserId = this.Session.GetCurrentUserId();
+            this.finOperationService.Edit(model);
+            return this.SuccessResult();
+        }
+
         [HttpPost]
         public CustomJsonResult Delete(long id)
         {
