@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\Categories\GeneralCategoryDto.cs" />
+    <Compile Include="Dto\Filters\FinOperationFilterDto.cs" />
+    <Compile Include="Dto\Filters\RangeFilter`1.cs" />
+    <Compile Include="Dto\Filters\FinOpType.cs" />
     <Compile Include="Dto\FinancialOperation\AddEditFinOperationDto.cs" />
     <Compile Include="Dto\User\CreateUserDto.cs" />
     <Compile Include="Dto\FinancialOperation\FinOperationListItemDto.cs" />
@@ -59,6 +62,13 @@
     <Compile Include="Services\Implementations\UserService.cs" />
     <Compile Include="Dto\Tags\SimpleTagDto.cs" />
     <Compile Include="Services\Implementations\TagsService.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpCategorySpec.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpDateSpec.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpTagsSpec.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpDescriptionSpec.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpTypeSpec.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpUserSpec.cs" />
+    <Compile Include="Specifications\FinOperationSpecs\FinOpValueSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyKeeper.Core\MoneyKeeper.Core.csproj">

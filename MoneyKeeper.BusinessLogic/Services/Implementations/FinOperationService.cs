@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MoneyKeeper.BusinessLogic.Dto.Filters;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.BusinessLogic.Dto.Tags;
 using MoneyKeeper.BusinessLogic.Mappings;
+using MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs;
+using MoneyKeeper.Core;
 using MoneyKeeper.Core.Entities;
 using MoneyKeeper.DataAccess.Repository;
 
@@ -21,6 +24,19 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
         {
             return
                 this.repository.GetByCriteria<FinancialOperation>(finOp => finOp.UserId == userId)
+                    .Select(finOp => finOp.ToFinOperationListItemDto())
+                    .ToList();
+        }
+
+        public List<FinOperationListItemDto> GetByFilter(FinOperationFilterDto filter)
+        {
+            Specification<FinancialOperation> specification = this.CreateSpecFilter(filter);
+
+            return
+                this.repository.GetByCriteriaIncluding(
+                        specification.Predicate,
+                        finOp => finOp.Category,
+                        finOp => finOp.Tags)
                     .Select(finOp => finOp.ToFinOperationListItemDto())
                     .ToList();
         }
@@ -79,6 +95,18 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
 
             this.repository.Delete(finOperation);
             this.repository.SaveChanges();
+        }
+
+        private Specification<FinancialOperation> CreateSpecFilter(FinOperationFilterDto filter)
+        {
+            return
+                new FinOpUserSpec(filter.UserId) &
+                new FinOpTypeSpec(filter.Type) &
+                new FinOpValueSpec(filter.Value) &
+                new FinOpDateSpec(filter.Date) &
+                new FinOpCategorySpec(filter.CategoriesIds) &
+                new FinOpTagsSpec(filter.TagsIds) &
+                new FinOpDescriptionSpec(filter.Description);
         }
 
         private List<Tag> ExtractNewTags(AddEditFinOperationDto model)
