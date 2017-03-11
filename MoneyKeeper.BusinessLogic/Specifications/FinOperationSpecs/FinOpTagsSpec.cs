@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using MoneyKeeper.Core;
 using MoneyKeeper.Core.Entities;
+using MoneyKeeper.Core.Extensions;
 
 namespace MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs
 {
@@ -19,7 +20,9 @@ namespace MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs
         {
             get
             {
-                return finOp => finOp.Tags.Any(tag => this.tagsIds.Contains(tag.Id));
+                return this.tagsIds.IsNullOrEmpty()
+                    ? (Expression<Func<FinancialOperation, bool>>)(_ => true)
+                    : (finOp => finOp.Tags.Any(tag => this.tagsIds.Contains(tag.Id)));
             }
         }
     }

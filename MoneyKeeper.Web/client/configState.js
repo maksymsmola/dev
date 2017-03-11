@@ -73,6 +73,11 @@ module.exports = function($stateProvider, $urlRouterProvider) {
     resolve: {
       $title: function() {
         return "История";
+      },
+      tags: function($http) {
+        "ngInject";
+
+        return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
       }
     }
   };
@@ -97,7 +102,7 @@ module.exports = function($stateProvider, $urlRouterProvider) {
         return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
       },
       crudType: function() {
-        return finOpCrudType.add
+        return finOpCrudType.add;
       },
       model: function() {
         return {
@@ -133,7 +138,7 @@ module.exports = function($stateProvider, $urlRouterProvider) {
         return $http.get("/Tags/GetAllForUser").then(function(result) { return result.data; });
       },
       crudType: function() {
-        return finOpCrudType.add
+        return finOpCrudType.add;
       },
       model: function() {
         return {

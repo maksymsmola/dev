@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using MoneyKeeper.BusinessLogic.Dto.Filters;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.BusinessLogic.Services;
 using MoneyKeeper.Web.ActionResults;
@@ -20,6 +21,14 @@ namespace MoneyKeeper.Web.Controllers
         {
             long userId = this.Session.GetCurrentUserId();
             return this.CustomJson(this.finOperationService.GetAllForUser(userId));
+        }
+
+        [HttpGet]
+        public CustomJsonResult GetByFilter(FinOperationFilterDto filter)
+        {
+            filter.UserId = this.Session.GetCurrentUserId();
+
+            return this.CustomJson(this.finOperationService.GetByFilter(filter));
         }
 
         [HttpPost]
