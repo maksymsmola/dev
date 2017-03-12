@@ -19,17 +19,29 @@ namespace MoneyKeeper.Core
 
         public static Specification<T> operator &(Specification<T> left, Specification<T> right)
         {
-            BinaryExpression andAlsoExpression = Expression.AndAlso(left.Predicate, right.Predicate);
+            Expression<Func<T, bool>> leftPredicate = left.Predicate;
+            Expression<Func<T, bool>> rightPredicate = right.Predicate;
+
+            BinaryExpression andAlsoExpression =
+                Expression.AndAlso(
+                    leftPredicate.Body,
+                    new ParameterExpressionRewriter(leftPredicate.Parameters, rightPredicate.Parameters).Visit(rightPredicate.Body));
 
             Expression<Func<T, bool>> predicateExpression =
-                Expression.Lambda<Func<T, bool>>(andAlsoExpression, left.Predicate.Parameters.Single());
+                Expression.Lambda<Func<T, bool>>(andAlsoExpression, leftPredicate.Parameters);
 
             return new Specification<T>(predicateExpression);
         }
 
         public static Specification<T> operator |(Specification<T> left, Specification<T> right)
         {
-            BinaryExpression orElseExpression = Expression.OrElse(left.Predicate, right.Predicate);
+            Expression<Func<T, bool>> leftPredicate = left.Predicate;
+            Expression<Func<T, bool>> rightPredicate = right.Predicate;
+
+            BinaryExpression orElseExpression =
+                Expression.OrElse(
+                    leftPredicate.Body,
+                    new ParameterExpressionRewriter(leftPredicate.Parameters, rightPredicate.Parameters).Visit(rightPredicate.Body));
 
             Expression<Func<T, bool>> predicateExpression =
                 Expression.Lambda<Func<T, bool>>(orElseExpression, left.Predicate.Parameters.Single());

@@ -11,14 +11,16 @@ namespace MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs
 
         public FinOpDescriptionSpec(string description)
         {
-            this.description = description ?? string.Empty;
+            this.description = description;
         }
 
         public override Expression<Func<FinancialOperation, bool>> Predicate
         {
             get
             {
-                return finOp => finOp.Description.ToLower().Contains(this.description.ToLower());
+                return string.IsNullOrEmpty(this.description)
+                    ? (Expression<Func<FinancialOperation, bool>>)(_ => true)
+                    : (finOp => finOp.Description.ToLower().Contains(this.description.ToLower()));
             }
         }
     }

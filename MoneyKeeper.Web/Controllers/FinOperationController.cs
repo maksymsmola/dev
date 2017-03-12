@@ -23,7 +23,7 @@ namespace MoneyKeeper.Web.Controllers
             return this.CustomJson(this.finOperationService.GetAllForUser(userId));
         }
 
-        [HttpGet]
+        [HttpPost]
         public CustomJsonResult GetByFilter(FinOperationFilterDto filter)
         {
             filter.UserId = this.Session.GetCurrentUserId();

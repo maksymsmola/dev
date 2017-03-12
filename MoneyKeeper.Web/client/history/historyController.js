@@ -13,24 +13,26 @@ function historyController($http, $scope, categories, tags) {
 
   this.categories = categories;
   this.tags = tags;
-  this.filter = {
-    type: 0,
-    date: {
-      from: null,
-      to: null,
-      exactValue: false
-    },
-    value: {
-      from: null,
-      to: null,
-      exactValue: false
-    },
-    description: "",
-    categoriesIds: [],
-    tagsIds: []
-  };
+  this.filter = initFilter();
+  this.showFilters = false;
+
+  $scope.$watch("historyCtrl.filter.date.exactValue",
+    function(newVal, oldVal) {
+      if (newVal) {
+        vm.filter.date.to = null;
+      }
+    });
+
+  $scope.$watch("historyCtrl.filter.value.exactValue",
+      function(newVal, oldVal) {
+        if (newVal) {
+          vm.filter.value.to = null;
+        }
+      });
 
   this.operations = [];
+
+  loadOperations();
 
   this.formatTags = function(tags) {
     var tagsNams = _.map(tags, function(tag) {
@@ -50,11 +52,41 @@ function historyController($http, $scope, categories, tags) {
       });
   };
 
-  loadOperations();
+  this.getByFilters = function() {
+    $http.post("/FinOperation/GetByFilter", vm.filter)
+      .then(function(response) {
+        vm.operations = response.data;
+      });
+  };
+
+  this.clearFilters = function() {
+    this.filter = initFilter();
+
+    loadOperations();
+  };
 
   function loadOperations() {
     $http.get("/FinOperation/GetForCurrentUser").then(function(response) {
       vm.operations = response.data;
     });
   }
+
+  function initFilter() {
+    return {
+      type: 0,
+      date: {
+        from: null,
+        to: null,
+        exactValue: false
+      },
+      value: {
+        from: null,
+        to: null,
+        exactValue: false
+      },
+      description: "",
+      categoriesIds: [],
+      tagsIds: []
+    };
+  };
 }

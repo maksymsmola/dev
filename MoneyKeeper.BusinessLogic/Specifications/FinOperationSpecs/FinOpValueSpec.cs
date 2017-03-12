@@ -23,7 +23,7 @@ namespace MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs
         {
             get
             {
-                if (!this.filter.From.HasValue && !this.filter.To.HasValue)
+                if (this.filter.From == null && this.filter.To == null)
                 {
                     return _ => true;
                 }
