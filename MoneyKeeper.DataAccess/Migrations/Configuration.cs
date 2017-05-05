@@ -1,4 +1,4 @@
-using System.Data.Entity.Migrations;
+п»їusing System.Data.Entity.Migrations;
 using MoneyKeeper.Core.Entities;
 
 namespace MoneyKeeper.DataAccess.Migrations
@@ -14,19 +14,19 @@ namespace MoneyKeeper.DataAccess.Migrations
         {
             context.Categories.AddOrUpdate(
                 x => x.Name,
-                new Category { Name = "Услуги связи", Type = FinOperationType.Expense },
-                new Category { Name = "Питание", Type = FinOperationType.Expense },
-                new Category { Name = "Комунальные услуги", Type = FinOperationType.Expense },
-                new Category { Name = "Транспорт", Type = FinOperationType.Expense },
-                new Category { Name = "Развлечения", Type = FinOperationType.Expense },
-                new Category { Name = "Одежда", Type = FinOperationType.Expense },
-                new Category { Name = "Медицина", Type = FinOperationType.Expense },
-                new Category { Name = "Канцелярия", Type = FinOperationType.Expense },
-                new Category { Name = "Техника", Type = FinOperationType.Expense },
+                new Category { Name = "РЈСЃР»СѓРіРё СЃРІСЏР·Рё", Type = FinOperationType.Expense },
+                new Category { Name = "РџРёС‚Р°РЅРёРµ", Type = FinOperationType.Expense },
+                new Category { Name = "РљРѕРјСѓРЅР°Р»СЊРЅС‹Рµ СѓСЃР»СѓРіРё", Type = FinOperationType.Expense },
+                new Category { Name = "РўСЂР°РЅСЃРїРѕСЂС‚", Type = FinOperationType.Expense },
+                new Category { Name = "Р Р°Р·РІР»РµС‡РµРЅРёСЏ", Type = FinOperationType.Expense },
+                new Category { Name = "РћРґРµР¶РґР°", Type = FinOperationType.Expense },
+                new Category { Name = "РњРµРґРёС†РёРЅР°", Type = FinOperationType.Expense },
+                new Category { Name = "РљР°РЅС†РµР»СЏСЂРёСЏ", Type = FinOperationType.Expense },
+                new Category { Name = "РўРµС…РЅРёРєР°", Type = FinOperationType.Expense },
 
-                new Category { Name = "Стипендия", Type = FinOperationType.Income },
-                new Category { Name = "Зарплата", Type = FinOperationType.Income },
-                new Category { Name = "Бизнес-сделки", Type = FinOperationType.Income }
+                new Category { Name = "РЎС‚РёРїРµРЅРґРёСЏ", Type = FinOperationType.Income },
+                new Category { Name = "Р—Р°СЂРїР»Р°С‚Р°", Type = FinOperationType.Income },
+                new Category { Name = "Р‘РёР·РЅРµСЃ-СЃРґРµР»РєРё", Type = FinOperationType.Income }
                 );
 
             context.SaveChanges();
