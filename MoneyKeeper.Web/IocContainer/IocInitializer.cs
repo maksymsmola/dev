@@ -45,6 +45,7 @@ namespace MoneyKeeper.Web.IocContainer
             Container.Register(Component.For<IFinOperationService>().ImplementedBy<FinOperationService>().LifeStyle.PerWebRequest);
             Container.Register(Component.For<ICategoriesService>().ImplementedBy<CategoriesService>().LifeStyle.PerWebRequest);
             Container.Register(Component.For<ITagsService>().ImplementedBy<TagsService>().LifeStyle.PerWebRequest);
+            Container.Register(Component.For<IStatisticService>().ImplementedBy<StatisticService>().LifeStyle.PerWebRequest);
         }
     }
 }

@@ -7,6 +7,8 @@ require("./authorization/signUpController");
 require("./layout/layoutController");
 require("./finOperationsCrud/addFinOperationController");
 require("./history/historyController");
+require("./statistic/statisticController");
+
 require("./common/fetchCategories");
 
 require("./authInterceptor");

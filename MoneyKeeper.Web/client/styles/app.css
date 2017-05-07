@@ -30,6 +30,10 @@ md-input-container.md-block.dropdown {
     margin: auto;
 }
 
+.actions-block.statistic {
+    margin-top: 25px;
+}
+
 .history-tab-content {
     
 }

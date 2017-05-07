@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
+using MoneyKeeper.BusinessLogic.Dto.Statistic;
+using MoneyKeeper.Core;
 using MoneyKeeper.Core.Entities;
 
 namespace MoneyKeeper.BusinessLogic.Mappings
@@ -44,6 +46,18 @@ namespace MoneyKeeper.BusinessLogic.Mappings
                 Type = finOp.Type,
                 Value = finOp.Value,
                 Tags = finOp.Tags.Select(tag => tag.ToSimpleTagDto()).ToList()
+            };
+        }
+
+        public static GeneralFinOperationModel ToGeneralFinOperationModel(this FinancialOperation finOp)
+        {
+            return new GeneralFinOperationModel
+            {
+                Type = finOp.Type,
+                Value = finOp.Value,
+                Date = finOp.Date,
+                Description = finOp.Description,
+                CategoryName = finOp.Category?.Name ?? Constants.NO_CATEGORY
             };
         }
     }

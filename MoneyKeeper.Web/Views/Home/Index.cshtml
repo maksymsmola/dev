@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>Money Keeper</title>
     <!--todo: use webpack to get styles from node_modules directory-->
-    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css" />
-    <link rel="stylesheet" href="node_modules/angular-material-data-table/dist/md-data-table.min.css" />
+    <link rel="stylesheet" href="@Url.Content("~/node_modules/angular-material/angular-material.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/node_modules/angular-material-data-table/dist/md-data-table.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/client/styles/app.css")" />
 </head>
 
@@ -18,7 +18,7 @@
         <md-progress-circular ng-show="isLoading" md-mode="indeterminate" md-diameter="150px"></md-progress-circular>
     </div>
 
-    <script src="dist/app.js"></script>
+    <script src="@Url.Content("~/dist/app.js")"></script>
 </body>
 
 </html>

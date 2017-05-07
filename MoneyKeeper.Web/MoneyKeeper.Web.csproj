@@ -147,6 +147,7 @@
     <Compile Include="Controllers\FinOperationController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
@@ -167,6 +168,7 @@
     <Content Include="client\authorization\signInController.js" />
     <Content Include="client\authorization\signUpController.js" />
     <Content Include="client\common\fetchCategories.js" />
+    <Content Include="client\common\finOpCrudType.js" />
     <Content Include="client\common\finOperationType.js" />
     <Content Include="client\configCalendar.js" />
     <Content Include="client\configState.js" />
@@ -176,12 +178,13 @@
     <Content Include="client\modulesDefinition.js" />
     <Content Include="client\services\dateService.js" />
     <Content Include="client\spinnerInterceptor.js" />
+    <Content Include="client\statistic\statisticController.js" />
     <Content Include="client\styles\app.css" />
     <Content Include="client\views\add-fin-operation.html" />
     <Content Include="client\views\history.html" />
+    <Content Include="client\views\home.html" />
     <Content Include="client\views\layout.html" />
     <Content Include="client\views\main.html" />
-    <Content Include="client\views\home.html" />
     <Content Include="client\views\sign-in.html" />
     <Content Include="client\views\sign-up.html" />
     <Content Include="favicon.ico" />

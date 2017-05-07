@@ -45,6 +45,7 @@
     <Compile Include="Dto\Filters\RangeFilter`1.cs" />
     <Compile Include="Dto\Filters\FinOpType.cs" />
     <Compile Include="Dto\FinancialOperation\AddEditFinOperationDto.cs" />
+    <Compile Include="Dto\Statistic\GeneralFinOperationModel.cs" />
     <Compile Include="Dto\User\CreateUserDto.cs" />
     <Compile Include="Dto\FinancialOperation\FinOperationListItemDto.cs" />
     <Compile Include="Dto\User\SimpleUserDto.cs" />
@@ -55,8 +56,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IFinOperationService.cs" />
     <Compile Include="Services\Implementations\CategoriesService.cs" />
+    <Compile Include="Dto\Statistic\CategoryReportItem.cs" />
+    <Compile Include="Dto\Statistic\CategoryReportModel.cs" />
     <Compile Include="Services\Implementations\FinOperationService.cs" />
     <Compile Include="Services\ICategoriesService.cs" />
+    <Compile Include="Dto\Statistic\MonthlyReportItemModel.cs" />
+    <Compile Include="Services\Implementations\StatisticService.cs" />
+    <Compile Include="Services\IStatisticService.cs" />
     <Compile Include="Services\ITagsService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\Implementations\UserService.cs" />

@@ -12,3 +12,19 @@
         </md-button>
     </md-content>
 </div>
+
+<div class="actions-block statistic">
+    <md-toolbar>
+        <h3 class="actions-header">Статистика</h3>
+    </md-toolbar>
+
+    <md-content class="box-section" ng-controller="statisticController" layout-padding>
+        <div google-chart chart="monthlyReport" style="height:500px; width:98%;"></div>
+
+        <md-switch ng-model="isColumnChart" aria-label="categories-char-type-switch">
+            Отображать колонками
+        </md-switch>
+        <div google-chart chart="expensesCategoriesChart" style="height:600px; width:98%;"></div>
+        <div google-chart chart="incomesCategoriesChart" style="height:600px; width:98%;"></div>
+    </md-content>
+</div>
