@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201701022030089_AddedLoginNameForUser.Designer.cs">
       <DependentUpon>201701022030089_AddedLoginNameForUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705101514037_AddedStatefulEntity.cs" />
+    <Compile Include="Migrations\201705101514037_AddedStatefulEntity.Designer.cs">
+      <DependentUpon>201705101514037_AddedStatefulEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MoneyKeeperContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701022030089_AddedLoginNameForUser.resx">
       <DependentUpon>201701022030089_AddedLoginNameForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705101514037_AddedStatefulEntity.resx">
+      <DependentUpon>201705101514037_AddedStatefulEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

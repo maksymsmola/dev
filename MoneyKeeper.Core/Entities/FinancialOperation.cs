@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace MoneyKeeper.Core.Entities
 {
-    public class FinancialOperation : BaseEntity
+    public class FinancialOperation : StatefulEntity
     {
         public DateTime Date { get; set; }
 

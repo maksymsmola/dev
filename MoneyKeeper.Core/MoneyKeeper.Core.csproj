@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Entities\EntityState.cs" />
+    <Compile Include="Entities\StatefulEntity.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\FinancialOperation.cs" />
     <Compile Include="Entities\Tag.cs" />
