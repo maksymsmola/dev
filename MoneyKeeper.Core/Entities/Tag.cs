@@ -2,7 +2,7 @@
 
 namespace MoneyKeeper.Core.Entities
 {
-    public class Tag : BaseEntity
+    public class Tag : StatefulEntity
     {
         public string Name { get; set; }
 
