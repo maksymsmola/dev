@@ -10,8 +10,8 @@ namespace MoneyKeeper.DataAccess.Migrations
             this.AddColumn("dbo.FinancialOperations", "State", c => c.Int(nullable: true));
             this.AddColumn("dbo.Tags", "State", c => c.Int(nullable: true));
 
-            this.Sql($"UPDATE dbo.FinancialOperations SET State={EntityState.Untouched:D};");
-            this.Sql($"UPDATE dbo.Tags SET State={EntityState.Untouched:D};");
+            this.Sql($"UPDATE dbo.FinancialOperations SET State={EntityState.Added:D};");
+            this.Sql($"UPDATE dbo.Tags SET State={EntityState.Added:D};");
 
             this.AlterColumn("dbo.FinancialOperations", "State", c => c.Int(nullable: false));
             this.AlterColumn("dbo.Tags", "State", c => c.Int(nullable: false));
