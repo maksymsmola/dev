@@ -24,6 +24,7 @@ namespace MoneyKeeper.Mobile.Api
             container.Register(Component.For<ICategoriesService>().ImplementedBy<CategoriesService>().LifeStyle.PerWebRequest);
             container.Register(Component.For<ITagsService>().ImplementedBy<TagsService>().LifeStyle.PerWebRequest);
             container.Register(Component.For<IStatisticService>().ImplementedBy<StatisticService>().LifeStyle.PerWebRequest);
+            container.Register(Component.For<ISynchronizationService>().ImplementedBy<SynchronizationService>().LifeStyle.PerWebRequest);
         }
     }
 }

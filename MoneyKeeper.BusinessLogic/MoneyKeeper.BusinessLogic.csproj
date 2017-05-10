@@ -61,7 +61,12 @@
     <Compile Include="Services\Implementations\FinOperationService.cs" />
     <Compile Include="Services\ICategoriesService.cs" />
     <Compile Include="Dto\Statistic\MonthlyReportItemModel.cs" />
+    <Compile Include="Dto\Synchronization\FinOperation\FinOperationSyncDto.cs" />
+    <Compile Include="Services\ISynchronizationService.cs" />
     <Compile Include="Services\Implementations\StatisticService.cs" />
+    <Compile Include="Services\Implementations\SynchronizationService.cs" />
+    <Compile Include="Dto\Synchronization\SyncRequest.cs" />
+    <Compile Include="Dto\Synchronization\SyncResponse.cs" />
     <Compile Include="Services\IStatisticService.cs" />
     <Compile Include="Services\ITagsService.cs" />
     <Compile Include="Services\IUserService.cs" />

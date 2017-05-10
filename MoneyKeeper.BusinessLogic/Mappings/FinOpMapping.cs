@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.BusinessLogic.Dto.Statistic;
+using MoneyKeeper.BusinessLogic.Dto.Synchronization.FinOperation;
+using MoneyKeeper.BusinessLogic.Services.Implementations;
 using MoneyKeeper.Core;
 using MoneyKeeper.Core.Entities;
 
@@ -58,6 +60,32 @@ namespace MoneyKeeper.BusinessLogic.Mappings
                 Date = finOp.Date,
                 Description = finOp.Description,
                 CategoryName = finOp.Category?.Name ?? Constants.NO_CATEGORY
+            };
+        }
+
+        public static FinOperationSyncDto ToFinOperationSyncDto(this FinancialOperation finOp)
+        {
+            return new FinOperationSyncDto
+            {
+                Id = finOp.Id,
+                Date = finOp.Date,
+                Value = finOp.Value,
+                Description = finOp.Description,
+                Type = finOp.Type
+            };
+        }
+
+        public static FinancialOperation ToFinOperationSyncDto(this FinOperationSyncDto finOp, long userId)
+        {
+            return new FinancialOperation
+            {
+                Id = finOp.Id,
+                Date = finOp.Date,
+                Value = finOp.Value,
+                Description = finOp.Description,
+                Type = finOp.Type,
+                UserId = userId,
+                State = EntityState.Synchronized
             };
         }
     }
