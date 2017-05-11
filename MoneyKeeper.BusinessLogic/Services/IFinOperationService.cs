@@ -17,5 +17,7 @@ namespace MoneyKeeper.BusinessLogic.Services
         void Edit(AddEditFinOperationDto model);
 
         void Delete(long id);
+
+        long LastAddedFinOperationForUser(long userId);
     }
 }

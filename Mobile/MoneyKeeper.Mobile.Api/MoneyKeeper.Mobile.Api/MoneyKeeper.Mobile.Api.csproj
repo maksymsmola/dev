@@ -144,10 +144,13 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BrowserJsonFormatter.cs" />
+    <Compile Include="Controllers\FinOperationController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
+    <Compile Include="Controllers\SyncController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="CustomAuthorizeAttribute.cs" />
     <Compile Include="DependencyConventions.cs" />
+    <Compile Include="Extensions\ApiControllerExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

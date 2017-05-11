@@ -97,6 +97,11 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             this.repository.SaveChanges();
         }
 
+        public long LastAddedFinOperationForUser(long userId)
+        {
+            return this.repository.FindById<User>(userId).FinancialOperations.Last().Id;
+        }
+
         private Specification<FinancialOperation> CreateSpecFilter(FinOperationFilterDto filter)
         {
             return
