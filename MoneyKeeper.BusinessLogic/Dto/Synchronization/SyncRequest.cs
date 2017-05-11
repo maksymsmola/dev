@@ -11,13 +11,13 @@ namespace MoneyKeeper.BusinessLogic.Dto.Synchronization
 
         public List<FinOperationSyncDto> UpdatedFinOperations { get; set; }
 
-        public List<FinOperationSyncDto> DeletedFinOperations { get; set; }
+        public List<long> DeletedFinOperations { get; set; }
 
         public SyncRequest()
         {
             this.AddedFinOperations = new List<FinOperationSyncDto>();
             this.UpdatedFinOperations = new List<FinOperationSyncDto>();
-            this.DeletedFinOperations = new List<FinOperationSyncDto>();
+            this.DeletedFinOperations = new List<long>();
         }
     }
 }

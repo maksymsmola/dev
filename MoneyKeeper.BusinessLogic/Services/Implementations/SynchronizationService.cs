@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MoneyKeeper.BusinessLogic.Dto.Synchronization;
 using MoneyKeeper.BusinessLogic.Dto.Synchronization.FinOperation;
 using MoneyKeeper.BusinessLogic.Mappings;
 using MoneyKeeper.Core.Entities;
+using MoneyKeeper.Core.Extensions;
 using MoneyKeeper.DataAccess.Repository;
 
 namespace MoneyKeeper.BusinessLogic.Services.Implementations
@@ -24,19 +24,39 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
                 = this.repository.GetByCriteria<FinancialOperation>(
                     x => x.UserId == dataFromClient.UserId && x.State != EntityState.Synchronized);
 
-            SyncResponse syncResponse = new SyncResponse();
+            var syncResponse = new SyncResponse();
 
-            this.SyncAddedOnClientToServer(dataFromClient.UserId, dataFromClient.AddedFinOperations);
             syncResponse.AddedFinOperations
                 = this.SyncAddedOnServerToClient(modifiedFinOperationsOnServer.Where(x => x.State == EntityState.Added).ToList());
+            this.SyncAddedOnClientToServer(dataFromClient.UserId, dataFromClient.AddedFinOperations);
 
-            throw new NotImplementedException();
+            List<FinOperationSyncDto> updatedOnServer
+                = this.SyncUpdatedOnServerToClient(modifiedFinOperationsOnServer.Where(x => x.State == EntityState.Deleted).ToList());
+
+            List<long> deltedIdsOnServer
+                = this.SyncDeletedOnServerToClient(modifiedFinOperationsOnServer.Where(x => x.State == EntityState.Deleted).ToList());
+
+            List<long> updatedOnServerIds = updatedOnServer.Select(x => x.Id).ToList();
+            List<long> updatedOrDeletedIdsOnServer = deltedIdsOnServer.Union(updatedOnServerIds).ToList();
+
+            List<long> toDeleteOnClientIds
+                = dataFromClient.DeletedFinOperations.Where(x => !updatedOrDeletedIdsOnServer.Contains(x)).ToList();
+            syncResponse.DeletedFinOperationsIds = toDeleteOnClientIds;
+            this.SyncDeletedOnClientoServer(toDeleteOnClientIds);
+
+            List<FinOperationSyncDto> toUpdateFromClient
+                = dataFromClient.UpdatedFinOperations.Where(x => !updatedOrDeletedIdsOnServer.Contains(x.Id)).ToList();
+            this.SyncUpdatedOnClientToServer(toUpdateFromClient);
+
+            syncResponse.UpdatedFinOperations = toUpdateFromClient.Union(updatedOnServer).ToList();
+
+            return syncResponse;
         }
 
         private List<FinOperationSyncDto> SyncAddedOnServerToClient(List<FinancialOperation> addedOnServer)
         {
-            List<FinOperationSyncDto> goesToClient = new List<FinOperationSyncDto>();
-            foreach (var finOperation in addedOnServer)
+            var goesToClient = new List<FinOperationSyncDto>();
+            foreach (FinancialOperation finOperation in addedOnServer)
             {
                 finOperation.State = EntityState.Synchronized;
                 goesToClient.Add(finOperation.ToFinOperationSyncDto());
@@ -47,36 +67,64 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
 
         private void SyncAddedOnClientToServer(long userId, List<FinOperationSyncDto> addedOnClient)
         {
-            var toAddFromClient = addedOnClient.Select(x => x.ToFinOperationSyncDto(userId)).ToList();
+            List<FinancialOperation> toAddFromClient = addedOnClient.Select(x => x.ToFinOperationSyncDto(userId)).ToList();
             this.repository.AddRange(toAddFromClient);
         }
 
-        private List<long> SyncDeletedOnServerToClient(
-            List<FinancialOperation> deletedOnServer,
-            List<FinOperationSyncDto> deletedOnCLient)
+        private List<long> SyncDeletedOnServerToClient(List<FinancialOperation> deletedOnServer)
         {
-            throw new NotImplementedException();
+            var deletedIds = new List<long>(deletedOnServer.Count);
+            foreach (FinancialOperation operation in deletedOnServer)
+            {
+                operation.State = EntityState.Synchronized;
+                deletedIds.Add(operation.Id);
+            }
+
+            return deletedIds;
         }
 
-        private List<long> SyncDeletedOnClientoServer(
-            List<FinancialOperation> deletedOnServer,
-            List<FinOperationSyncDto> deletedOnCLient)
+        // todo: SaveChanges() ?
+        private void SyncDeletedOnClientoServer(List<long> deletedOnClientIds)
         {
-            throw new NotImplementedException();
+            foreach (long id in deletedOnClientIds)
+            {
+                this.repository.DeleteById<FinancialOperation>(id);
+            }
         }
 
-        private List<FinOperationSyncDto> SyncUpdatedOnServerToClient(
-            List<FinancialOperation> updatedOnServer,
-            List<FinOperationSyncDto> updatedOnCLient)
+        private List<FinOperationSyncDto> SyncUpdatedOnServerToClient(List<FinancialOperation> updatedOnServer)
         {
-            throw new NotImplementedException();
+            var goesToClient = new List<FinOperationSyncDto>(updatedOnServer.Count);
+            foreach (FinancialOperation operation in updatedOnServer)
+            {
+                operation.State = EntityState.Synchronized;
+                goesToClient.Add(operation.ToFinOperationSyncDto());
+            }
+
+            return goesToClient;
         }
 
-        private List<long> SyncUpdatedOnClientToServer(
-            List<FinancialOperation> updatedOnServer,
-            List<FinOperationSyncDto> updatedOnCLient)
+        // todo: SaveChanges() ?
+        private void SyncUpdatedOnClientToServer(List<FinOperationSyncDto> updatedOnClient)
         {
-            throw new NotImplementedException();
+            List<long> ids = updatedOnClient.SelectList(x => x.Id);
+            List<FinancialOperation> operationsToUpdate
+                = this.repository
+                    .GetByCriteria<FinancialOperation>(x => ids.Contains(x.Id))
+                    .OrderBy(x => x.Id)
+                    .ToList();
+
+            updatedOnClient = updatedOnClient.OrderBy(x => x.Id).ToList();
+
+            for (int i = 0; i < updatedOnClient.Count; i++)
+            {
+                FinancialOperation currentOnServer = operationsToUpdate[i];
+                FinOperationSyncDto currentOnClient = updatedOnClient[i];
+
+                currentOnServer.Value = currentOnClient.Value;
+                currentOnClient.Date = currentOnClient.Date;
+                currentOnClient.Description = currentOnClient.Description;
+            }
         }
     }
 }
