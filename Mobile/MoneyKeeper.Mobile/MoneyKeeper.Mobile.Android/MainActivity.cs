@@ -1,12 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using Android.App;
 using Android.Content;
 using Android.Widget;
 using Android.OS;
 using Android.Views;
+using ModernHttpClient;
+using MoneyKeeper.Mobile.Android.DataAccess;
 
 namespace MoneyKeeper.Mobile.Android
 {
@@ -19,47 +22,45 @@ namespace MoneyKeeper.Mobile.Android
 
             this.SetContentView(Resource.Layout.Main);
 
-            //var textView = this.FindViewById<TextView>(Resource.Id.textView);
-            //if (MoneyKeeperApplication.IsAuthenticated)
-            //{
-            //    textView.SetText("Authenticated", TextView.BufferType.Normal);
-            //}
-            //else
-            //{
-            //    textView.SetText("Ni figa ne authenticated", TextView.BufferType.Normal);
-            //}
-        }
-
-        public void OnLoginClick(View view)
-        {
-            string userName = this.FindViewById<EditText>(Resource.Id.userName).Text;
-            string password = this.FindViewById<EditText>(Resource.Id.password).Text;
-            string body = $"{{\"userName\":\"{userName}\",\"password\":\"{password}\"}}";
-            byte[] bodyByte = Encoding.UTF8.GetBytes(body);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://10.0.2.2:54502/api/signIn");
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.TransferEncoding = "utf-8";
-            request.ContentLength = bodyByte.LongLength;
-
-            var dataStream = request.GetRequestStream();
-            dataStream.Write(bodyByte, 0, bodyByte.Length);
-            dataStream.Close();
-
-            string token = string.Empty;
-            using (WebResponse response = request.GetResponse())
-                using (var responseStream = response.GetResponseStream())
-                    using (StreamReader sr = new StreamReader(responseStream))
-                    {
-                        token = sr.ReadToEnd();
-                    }
-
-            if (!string.IsNullOrWhiteSpace(token))
+            if (MoneyKeeperApp.IsAuthenticated)
             {
                 var intetn = new Intent(this, typeof(FinOperationsListActivity));
 
                 this.StartActivity(intetn);
+            }
+
+            this.FindViewById<Button>(Resource.Id.loginBtn).Click += this.OnLoginClick;
+        }
+
+        public void OnLoginClick(object sender, EventArgs eventArgs)
+        {
+            string userName = this.FindViewById<EditText>(Resource.Id.userName).Text;
+            string password = this.FindViewById<EditText>(Resource.Id.password).Text;
+
+            var httpClient = new HttpClient(new NativeMessageHandler());
+
+            var result = httpClient.PostAsync(
+                    "http://10.0.2.2:54502/api/signIn",
+                    new StringContent(
+                        $"{{\"userName\":\"{userName}\",\"password\":\"{password}\"}}",
+                        Encoding.UTF8,
+                        "application/json"))
+                .Result;
+
+            string token = result.Content.ReadAsStringAsync().Result;
+            if (result.IsSuccessStatusCode && !string.IsNullOrWhiteSpace(token))
+            {
+                Database.SaveToken(token);
+
+                MoneyKeeperApp.Token = token;
+
+                var intetn = new Intent(this, typeof(FinOperationsListActivity));
+
+                this.StartActivity(intetn);
+            }
+            else
+            {
+                Toast.MakeText(this, "Error occured while communication with server", ToastLength.Short);
             }
         }
     }

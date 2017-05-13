@@ -6,13 +6,13 @@ using MoneyKeeper.Mobile.Android.DataAccess;
 namespace MoneyKeeper.Mobile.Android
 {
     [Application]
-    public class MoneyKeeperApplication : Application
+    public class MoneyKeeperApp : Application
     {
         public static bool IsAuthenticated => !string.IsNullOrWhiteSpace(Token);
 
         public static string Token { get; set; }
 
-        public MoneyKeeperApplication(IntPtr handle, JniHandleOwnership ownerShip)
+        public MoneyKeeperApp(IntPtr handle, JniHandleOwnership ownerShip)
             : base(handle, ownerShip)
         {
         }

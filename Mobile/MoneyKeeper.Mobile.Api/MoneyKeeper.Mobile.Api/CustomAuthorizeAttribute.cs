@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,11 +24,17 @@ namespace MoneyKeeper.Mobile.Api
 
         private void Authorize(HttpActionContext actionContext)
         {
+            if (SkipAuthorization(actionContext))
+            {
+                return;
+            }
+
             string token = actionContext.Request.Headers.Authorization?.Parameter;
 
             if (string.IsNullOrWhiteSpace(token))
             {
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return;
             }
 
             // todo: implement token validation
@@ -36,6 +43,13 @@ namespace MoneyKeeper.Mobile.Api
             {
                 actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
             }
+        }
+
+        private static bool SkipAuthorization(HttpActionContext actionContext)
+        {
+            return
+                actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any()
+                || actionContext.ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
         }
     }
 }

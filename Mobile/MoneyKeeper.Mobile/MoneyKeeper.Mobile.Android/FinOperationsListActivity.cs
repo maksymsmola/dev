@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+using ModernHttpClient;
+using MoneyKeeper.Mobile.Android.Adapters;
+using MoneyKeeper.Mobile.Android.DataAccess;
+using Newtonsoft.Json;
 
 namespace MoneyKeeper.Mobile.Android
 {
@@ -20,6 +19,23 @@ namespace MoneyKeeper.Mobile.Android
             base.OnCreate(savedInstanceState);
 
             this.SetContentView(Resource.Layout.FinOperationsList);
+
+            this.GetList();
+        }
+
+        private void GetList()
+        {
+            var httpClient = new HttpClient(new NativeMessageHandler());
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bareer", MoneyKeeperApp.Token);
+
+            var response = httpClient.GetAsync("http://10.0.2.2:54502/api/FinOperations").Result;
+
+            var finOperations =
+                JsonConvert.DeserializeObject<List<FinOperation>>(response.Content.ReadAsStringAsync().Result);
+
+            var listView = this.FindViewById<ListView>(Resource.Id.listView);
+
+            listView.Adapter = new FinOperationsAdapter(this, this.LayoutInflater, finOperations);
         }
     }
 }

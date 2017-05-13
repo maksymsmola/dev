@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using MoneyKeeper.BusinessLogic.Services;
 using MoneyKeeper.Mobile.Api.Models;
@@ -15,16 +16,23 @@ namespace MoneyKeeper.Mobile.Api.Controllers
             this.userService = userService;
         }
 
-        public IHttpActionResult Post([FromBody] SignInModel model)
+        public HttpResponseMessage Post([FromBody] SignInModel model)
         {
             var user = this.userService.GetUserByCredentials(model.UserName, model.Password);
 
             if (user == null)
             {
-                return this.BadRequest("User not found");
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
 
-            return this.Content(HttpStatusCode.OK, TokenHelper.GenerateToken(user));
+            var resp = new HttpResponseMessage(HttpStatusCode.OK);
+
+            resp.Content = new StringContent(
+                TokenHelper.GenerateToken(user),
+                System.Text.Encoding.UTF8,
+                "text/plain");
+
+            return resp;
         }
     }
 }
