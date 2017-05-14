@@ -46,6 +46,59 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
             }
         }
 
+        public static List<FinOperation> GetAllFinOperations()
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                return connection.Query<FinOperation>("SELECT * FROM FinOperation;");
+            }
+        }
+
+        #region | For work with one FinOperation |
+
+        public static FinOperation GetById(long id)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                return connection.Get<FinOperation>(x => x.Id == id);
+            }
+        }
+
+        public static void AddFinOperation(FinOperation finOperation)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Insert(finOperation);
+            }
+        }
+
+        public static void UpdateFinOperation(FinOperation finOperation)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                string query = $@"
+UPDATE FinOperation
+SET {nameof(FinOperation.Value)} = '{finOperation.Value}',
+        {nameof(FinOperation.Description)} = '{finOperation.Description}',
+        {nameof(FinOperation.Date)} = '{finOperation.Date:yyyy-MM-dd}'
+    WHERE {nameof(FinOperation.Id)} = {finOperation.Id};";
+
+                connection.Execute(query);
+            }
+        }
+
+        public static void DeleteFinOperation(long id)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Execute($"DELETE FROM FinOperation WHERE Id = {id};");
+            }
+        }
+
+        #endregion
+
+        #region | For syncronization |
+
         public static List<FinOperation> GetNotSyncedData()
         {
             using (SQLiteConnection connection = CreateConnection())
@@ -60,14 +113,6 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
             using (SQLiteConnection connection = CreateConnection())
             {
                 connection.Execute($"DELETE FROM FinOperation WHERE State = {EntityState.Added:D};");
-            }
-        }
-
-        public static void AddFinOperation(FinOperation finOperation)
-        {
-            using (SQLiteConnection connection = CreateConnection())
-            {
-                connection.Insert(finOperation);
             }
         }
 
@@ -91,9 +136,9 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
                 sb.AppendLine($@"
 UPDATE FinOperation
     SET
-        {nameof(FinOperation.Value)} = {x.Value},
-        {nameof(FinOperation.Description)} = {x.Description},
-        {nameof(FinOperation.Date)} = {x.Date}
+        {nameof(FinOperation.Value)} = '{x.Value}',
+        {nameof(FinOperation.Description)} = '{x.Description}',
+        {nameof(FinOperation.Date)} = '{x.Date:yyyy-MM-dd}'
     WHERE {nameof(FinOperation.Id)} = {x.Id};");
             });
 
@@ -111,13 +156,7 @@ UPDATE FinOperation
             }
         }
 
-        public static List<FinOperation> GetAllFinOperations()
-        {
-            using (SQLiteConnection connection = CreateConnection())
-            {
-                return connection.Query<FinOperation>("SELECT * FROM FinOperation;");
-            }
-        }
+        #endregion
 
         private static SQLiteConnection CreateConnection()
         {

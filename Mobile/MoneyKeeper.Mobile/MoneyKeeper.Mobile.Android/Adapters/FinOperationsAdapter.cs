@@ -47,6 +47,11 @@ namespace MoneyKeeper.Mobile.Android.Adapters
             this.list = list;
         }
 
+        public override long GetItemId(int position)
+        {
+            return this.list[position].Id;
+        }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View view = convertView;
@@ -54,7 +59,7 @@ namespace MoneyKeeper.Mobile.Android.Adapters
             {
                 view = this.inflater.Inflate(Resource.Layout.FinOperationListItem, parent, false);
 
-                var finOperation = this.list[position];
+                FinOperation finOperation = this.list[position];
 
                 var holder = new FinOperationHolder(
                     view.FindViewById<TextView>(Resource.Id.descriptionTextView),

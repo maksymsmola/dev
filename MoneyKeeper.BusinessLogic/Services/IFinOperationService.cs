@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MoneyKeeper.BusinessLogic.Dto.Filters;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
+using MoneyKeeper.BusinessLogic.Dto.Synchronization.FinOperation;
 
 namespace MoneyKeeper.BusinessLogic.Services
 {
@@ -18,6 +19,10 @@ namespace MoneyKeeper.BusinessLogic.Services
 
         void Delete(long id);
 
-        long LastAddedFinOperationForUser(long userId);
+        FinOperationSyncDto AddPersistant(AddEditFinOperationDto dto);
+
+        FinOperationSyncDto UpdatePersistant(AddEditFinOperationDto dto);
+
+        void DeletePersistant(long finOperationId);
     }
 }

@@ -24,7 +24,14 @@ namespace MoneyKeeper.Mobile.Android
 
             if (MoneyKeeperApp.IsAuthenticated)
             {
+                var progress = new ProgressDialog(this);
+                progress.SetCancelable(false);
+
+                progress.Show();
+
                 SyncService.Synchronize();
+
+                progress.Cancel();
 
                 var intetn = new Intent(this, typeof(FinOperationsListActivity));
 
@@ -36,6 +43,11 @@ namespace MoneyKeeper.Mobile.Android
 
         public void OnLoginClick(object sender, EventArgs eventArgs)
         {
+            var progress = new ProgressDialog(this);
+            progress.SetCancelable(false);
+
+            progress.Show();
+
             string userName = this.FindViewById<EditText>(Resource.Id.userName).Text;
             string password = this.FindViewById<EditText>(Resource.Id.password).Text;
 
@@ -58,12 +70,16 @@ namespace MoneyKeeper.Mobile.Android
 
                 SyncService.Synchronize();
 
+                progress.Cancel();
+
                 var intetn = new Intent(this, typeof(FinOperationsListActivity));
 
                 this.StartActivity(intetn);
             }
             else
             {
+                progress.Cancel();
+
                 Toast.MakeText(this, "Error occured while communication with server", ToastLength.Short).Show();
             }
         }

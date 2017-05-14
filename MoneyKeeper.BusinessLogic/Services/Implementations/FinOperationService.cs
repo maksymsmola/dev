@@ -2,6 +2,7 @@
 using System.Linq;
 using MoneyKeeper.BusinessLogic.Dto.Filters;
 using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
+using MoneyKeeper.BusinessLogic.Dto.Synchronization.FinOperation;
 using MoneyKeeper.BusinessLogic.Dto.Tags;
 using MoneyKeeper.BusinessLogic.Mappings;
 using MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs;
@@ -97,9 +98,35 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             this.repository.SaveChanges();
         }
 
-        public long LastAddedFinOperationForUser(long userId)
+        public FinOperationSyncDto AddPersistant(AddEditFinOperationDto dto)
         {
-            return this.repository.FindById<User>(userId).FinancialOperations.Last().Id;
+            FinancialOperation finOperation = dto.ToFinancialOperation();
+            finOperation.State = EntityState.Synchronized;
+
+            this.repository.Add(finOperation);
+
+            this.repository.SaveChanges();
+
+            return finOperation.ToFinOperationSyncDto();
+        }
+
+        public FinOperationSyncDto UpdatePersistant(AddEditFinOperationDto dto)
+        {
+            var finOperation = this.repository.FindById<FinancialOperation>(dto.Id);
+
+            finOperation.Value = dto.Value;
+            finOperation.Date = dto.Date;
+            finOperation.Description = dto.Description;
+
+            this.repository.SaveChanges();
+
+            return finOperation.ToFinOperationSyncDto();
+        }
+
+        public void DeletePersistant(long finOperationId)
+        {
+            this.repository.DeleteById<FinancialOperation>(finOperationId);
+            this.repository.SaveChanges();
         }
 
         private Specification<FinancialOperation> CreateSpecFilter(FinOperationFilterDto filter)

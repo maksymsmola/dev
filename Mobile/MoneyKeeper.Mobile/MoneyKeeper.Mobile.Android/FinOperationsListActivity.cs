@@ -22,7 +22,13 @@ namespace MoneyKeeper.Mobile.Android
 
             this.SetContentView(Resource.Layout.FinOperationsList);
 
+            var progress = new ProgressDialog(this);
+            progress.SetCancelable(false);
+            progress.Show();
+
             this.GetList();
+
+            progress.Cancel();
 
             this.FindViewById<Button>(Resource.Id.goToAddFinOperationBtn).Click += (sender, args) =>
             {
@@ -38,6 +44,13 @@ namespace MoneyKeeper.Mobile.Android
                 = Database.GetAllFinOperations().OrderByDescending(x => x.Date).ToList();
 
             var listView = this.FindViewById<ListView>(Resource.Id.listView);
+            listView.ItemClick += (sender, args) =>
+            {
+                var intent = new Intent(this, typeof(EditFinOperationActivity));
+                intent.PutExtra(EditFinOperationActivity.OPERATION_ID_KEY, args.Id);
+
+                this.StartActivity(intent);
+            };
 
             listView.Adapter = new FinOperationsAdapter(this, this.LayoutInflater, finOperations);
         }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <EditText
+      android:id="@+id/edit_value"
+      android:inputType="number"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Сумма" />
+  <EditText
+      android:id="@+id/edit_date"
+      android:inputType="date"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Дата (YYYY-MM-DD)" />
+  <EditText
+      android:id="@+id/edit_description"
+      android:inputType="text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Описание" />
+  <Button
+      android:id="@+id/edit_editBtn"
+      android:text="Изменить"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  <Button
+      android:id="@+id/edit_deleteBtn"
+      android:text="Удалить"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+</LinearLayout>

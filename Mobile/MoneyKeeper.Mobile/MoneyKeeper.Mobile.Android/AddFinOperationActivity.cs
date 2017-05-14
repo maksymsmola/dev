@@ -26,11 +26,17 @@ namespace MoneyKeeper.Mobile.Android
 
             this.SetContentView(Resource.Layout.AddFinOperation);
 
+            this.FindViewById<RadioButton>(Resource.Id.radioExpense).Checked = true;
+            this.FindViewById<EditText>(Resource.Id.addFinOpDateEditText).Text = DateTime.Now.ToString("yyyy-MM-dd");
             this.FindViewById<Button>(Resource.Id.addFinOperationBtn).Click += this.OnAddFinOperationClick;
         }
 
         private void OnAddFinOperationClick(object sender, EventArgs eventArgs)
         {
+            var progress = new ProgressDialog(this);
+            progress.SetCancelable(false);
+            progress.Show();
+
             var finOperation = new FinOperation
             {
                 Value = double.Parse(this.FindViewById<EditText>(Resource.Id.addFinOpValueEditText).Text),
@@ -56,12 +62,15 @@ namespace MoneyKeeper.Mobile.Android
                 {
                     Database.AddFinOperation(JsonConvert.DeserializeObject<FinOperation>(response.Content.ReadAsStringAsync().Result));
 
+                    progress.Cancel();
+
                     var intent = new Intent(this, typeof(FinOperationsListActivity));
 
                     this.StartActivity(intent);
                 }
                 else
                 {
+                    progress.Cancel();
                     Toast.MakeText(this, "Error occured while ading operation", ToastLength.Short).Show();
                 }
             }

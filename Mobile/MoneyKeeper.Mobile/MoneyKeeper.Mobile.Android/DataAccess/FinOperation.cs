@@ -6,6 +6,8 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
     {
         public long Id { get; set; }
 
+        // todo: add internal primary key
+
         public double Value { get; set; }
 
         public DateTime Date { get; set; }

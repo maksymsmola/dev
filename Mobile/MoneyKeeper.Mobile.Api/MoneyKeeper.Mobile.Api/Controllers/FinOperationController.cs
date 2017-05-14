@@ -17,23 +17,27 @@ namespace MoneyKeeper.Mobile.Api.Controllers
             this.finOperationService = finOperationService;
         }
 
-        public IHttpActionResult Post([FromBody] FinOperationSyncDto model)
+        public IHttpActionResult Post([FromBody] AddEditFinOperationDto model)
         {
-            long userId = this.GetCurrentUserId();
+            model.UserId = this.GetCurrentUserId();
 
-            this.finOperationService.Add(new AddEditFinOperationDto
-            {
-                Amount = 1,
-                Date = model.Date,
-                Value = model.Value,
-                Type = model.Type,
-                Description = model.Description,
-                UserId = this.GetCurrentUserId()
-            });
+            FinOperationSyncDto result =  this.finOperationService.AddPersistant(model);
 
-            model.Id = this.finOperationService.LastAddedFinOperationForUser(userId);
+            return this.Content(HttpStatusCode.Created, result, new JsonMediaTypeFormatter(), "application/json");
+        }
 
-            return this.Content(HttpStatusCode.Created, model, new JsonMediaTypeFormatter(), "application/json");
+        public IHttpActionResult Put([FromBody] AddEditFinOperationDto model)
+        {
+            model.UserId = this.GetCurrentUserId();
+
+            FinOperationSyncDto result = this.finOperationService.UpdatePersistant(model);
+
+            return this.Content(HttpStatusCode.OK, result, new JsonMediaTypeFormatter(), "application/json");
+        }
+
+        public void Delete([FromUri] long id)
+        {
+            this.finOperationService.DeletePersistant(id);
         }
     }
 }
