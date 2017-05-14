@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using ModernHttpClient;
@@ -11,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace MoneyKeeper.Mobile.Android
 {
-    [Activity(Label = "FinOperationsListActivity")]
+    [Activity(Label = "Операции")]
     public class FinOperationsListActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -21,17 +23,19 @@ namespace MoneyKeeper.Mobile.Android
             this.SetContentView(Resource.Layout.FinOperationsList);
 
             this.GetList();
+
+            this.FindViewById<Button>(Resource.Id.goToAddFinOperationBtn).Click += (sender, args) =>
+            {
+                var intent = new Intent(this, typeof(AddFinOperationActivity));
+
+                this.StartActivity(intent);
+            };
         }
 
         private void GetList()
         {
-            var httpClient = new HttpClient(new NativeMessageHandler());
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bareer", MoneyKeeperApp.Token);
-
-            var response = httpClient.GetAsync("http://10.0.2.2:54502/api/FinOperations").Result;
-
-            var finOperations =
-                JsonConvert.DeserializeObject<List<FinOperation>>(response.Content.ReadAsStringAsync().Result);
+            List<FinOperation> finOperations
+                = Database.GetAllFinOperations().OrderByDescending(x => x.Date).ToList();
 
             var listView = this.FindViewById<ListView>(Resource.Id.listView);
 

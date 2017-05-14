@@ -12,6 +12,8 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
 
         public FinOperationType Type { get; set; }
 
+        public EntityState State { get; set; }
+
         public string Description { get; set; }
     }
 }

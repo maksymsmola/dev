@@ -26,9 +26,13 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
 
             var syncResponse = new SyncResponse();
 
-            syncResponse.AddedFinOperations
+            List<FinOperationSyncDto> toAddFromServer
                 = this.SyncAddedOnServerToClient(modifiedFinOperationsOnServer.Where(x => x.State == EntityState.Added).ToList());
-            this.SyncAddedOnClientToServer(dataFromClient.UserId, dataFromClient.AddedFinOperations);
+            List<FinancialOperation> toAddFromClient = this.SyncAddedOnClientToServer(dataFromClient.UserId, dataFromClient.AddedFinOperations);
+
+            this.repository.SaveChanges();
+
+            syncResponse.AddedFinOperations = toAddFromServer.Union(toAddFromClient.Select(x => x.ToFinOperationSyncDto())).ToList();
 
             List<FinOperationSyncDto> updatedOnServer
                 = this.SyncUpdatedOnServerToClient(modifiedFinOperationsOnServer.Where(x => x.State == EntityState.Deleted).ToList());
@@ -40,7 +44,7 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             List<long> updatedOrDeletedIdsOnServer = deltedIdsOnServer.Union(updatedOnServerIds).ToList();
 
             List<long> toDeleteOnClientIds
-                = dataFromClient.DeletedFinOperations.Where(x => !updatedOrDeletedIdsOnServer.Contains(x)).ToList();
+                = dataFromClient.DeletedFinOperationsIds.Where(x => !updatedOrDeletedIdsOnServer.Contains(x)).ToList();
             syncResponse.DeletedFinOperationsIds = toDeleteOnClientIds;
             this.SyncDeletedOnClientoServer(toDeleteOnClientIds);
 
@@ -49,6 +53,8 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             this.SyncUpdatedOnClientToServer(toUpdateFromClient);
 
             syncResponse.UpdatedFinOperations = toUpdateFromClient.Union(updatedOnServer).ToList();
+
+            this.repository.SaveChanges();
 
             return syncResponse;
         }
@@ -65,10 +71,12 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             return goesToClient;
         }
 
-        private void SyncAddedOnClientToServer(long userId, List<FinOperationSyncDto> addedOnClient)
+        private List<FinancialOperation> SyncAddedOnClientToServer(long userId, List<FinOperationSyncDto> addedOnClient)
         {
             List<FinancialOperation> toAddFromClient = addedOnClient.Select(x => x.ToFinOperationSyncDto(userId)).ToList();
             this.repository.AddRange(toAddFromClient);
+
+            return toAddFromClient;
         }
 
         private List<long> SyncDeletedOnServerToClient(List<FinancialOperation> deletedOnServer)

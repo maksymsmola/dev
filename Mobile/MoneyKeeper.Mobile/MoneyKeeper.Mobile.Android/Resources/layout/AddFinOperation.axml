@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <RadioGroup
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <RadioButton
+        android:id="@+id/radioIncome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Доход" />
+    <RadioButton
+          android:id="@+id/radioExpense"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Расход" />
+  </RadioGroup>
+  <EditText
+      android:id="@+id/addFinOpValueEditText"
+      android:inputType="number"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Сумма" />
+  <EditText
+      android:id="@+id/addFinOpDateEditText"
+      android:inputType="date"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Дата (YYYY-MM-DD)" />
+  <EditText
+      android:id="@+id/addFinOpDescriptionEditText"
+      android:inputType="text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Описание" />
+  <Button
+      android:id="@+id/addFinOperationBtn"
+      android:text="Добавить"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+</LinearLayout>

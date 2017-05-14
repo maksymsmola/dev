@@ -13,7 +13,7 @@ using MoneyKeeper.Mobile.Android.DataAccess;
 
 namespace MoneyKeeper.Mobile.Android
 {
-    [Activity(Label = "MoneyKeeper.Mobile.Android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Вход", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
@@ -24,6 +24,8 @@ namespace MoneyKeeper.Mobile.Android
 
             if (MoneyKeeperApp.IsAuthenticated)
             {
+                SyncService.Synchronize();
+
                 var intetn = new Intent(this, typeof(FinOperationsListActivity));
 
                 this.StartActivity(intetn);
@@ -54,13 +56,15 @@ namespace MoneyKeeper.Mobile.Android
 
                 MoneyKeeperApp.Token = token;
 
+                SyncService.Synchronize();
+
                 var intetn = new Intent(this, typeof(FinOperationsListActivity));
 
                 this.StartActivity(intetn);
             }
             else
             {
-                Toast.MakeText(this, "Error occured while communication with server", ToastLength.Short);
+                Toast.MakeText(this, "Error occured while communication with server", ToastLength.Short).Show();
             }
         }
     }

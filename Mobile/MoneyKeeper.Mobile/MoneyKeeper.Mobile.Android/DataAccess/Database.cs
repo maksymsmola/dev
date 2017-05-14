@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 
@@ -15,7 +17,7 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             dbPath = Path.Combine(folder, dbPath);
 
-            using (var connection = new SQLiteConnection(new SQLitePlatformAndroid(), dbPath))
+            using (SQLiteConnection connection = CreateConnection())
             {
                 connection.CreateTable<User>();
                 connection.CreateTable<FinOperation>();
@@ -24,7 +26,7 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
 
         public static string GetToken()
         {
-            using (var connection = new SQLiteConnection(new SQLitePlatformAndroid(), dbPath))
+            using (SQLiteConnection connection = CreateConnection())
             {
                 return connection.Query<User>("SELECT * FROM User;").FirstOrDefault()?.Token;
             }
@@ -32,16 +34,96 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
 
         public static void SaveToken(string token)
         {
-            using (var connection = new SQLiteConnection(new SQLitePlatformAndroid(), dbPath))
+            using (SQLiteConnection connection = CreateConnection())
             {
                 var existing = connection.Query<User>("SELECT * FROM User;").FirstOrDefault();
                 if (existing != null)
                 {
-                    connection.Execute("DELETE FROM User");
+                    connection.Execute("DELETE FROM User;");
                 }
 
                 connection.Insert(new User { Token = token });
             }
+        }
+
+        public static List<FinOperation> GetNotSyncedData()
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                return connection.Query<FinOperation>(
+                    $"SELECT * FROM FinOperation WHERE State <> {EntityState.Synchronized:D};");
+            }
+        }
+
+        public static void DeleteFinOperationsWithoutId()
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Execute($"DELETE FROM FinOperation WHERE State = {EntityState.Added:D};");
+            }
+        }
+
+        public static void AddFinOperation(FinOperation finOperation)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Insert(finOperation);
+            }
+        }
+
+        public static void AddFinOperations(List<FinOperation> finOperations)
+        {
+            finOperations.ForEach(x => x.State = EntityState.Synchronized);
+
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.InsertAll(finOperations);
+            }
+        }
+
+        public static void UpdateAllFinOperations(List<FinOperation> finOperations)
+        {
+            finOperations.ForEach(x => x.State = EntityState.Synchronized);
+
+            var sb = new StringBuilder();
+            finOperations.ForEach(x =>
+            {
+                sb.AppendLine($@"
+UPDATE FinOperation
+    SET
+        {nameof(FinOperation.Value)} = {x.Value},
+        {nameof(FinOperation.Description)} = {x.Description},
+        {nameof(FinOperation.Date)} = {x.Date}
+    WHERE {nameof(FinOperation.Id)} = {x.Id};");
+            });
+
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Execute(sb.ToString());
+            }
+        }
+
+        public static void DeleteFinOperations(List<long> ids)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Execute($"DELETE FROM FinOperation WHERE Id IN ({string.Join(",", ids)});");
+            }
+        }
+
+        public static List<FinOperation> GetAllFinOperations()
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                return connection.Query<FinOperation>("SELECT * FROM FinOperation;");
+            }
+        }
+
+        private static SQLiteConnection CreateConnection()
+        {
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dbPath);
+
+            return new SQLiteConnection(new SQLitePlatformAndroid(), path);
         }
     }
 }

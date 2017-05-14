@@ -76,15 +76,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\FinOperationsAdapter.cs" />
+    <Compile Include="AddFinOperationActivity.cs" />
     <Compile Include="DataAccess\Database.cs" />
     <Compile Include="DataAccess\FinOperation.cs" />
     <Compile Include="DataAccess\FinOperationType.cs" />
+    <Compile Include="DataAccess\EntityState.cs" />
     <Compile Include="DataAccess\User.cs" />
     <Compile Include="FinOperationsListActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MoneyKeeperApp.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SyncModel.cs" />
+    <Compile Include="SyncService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -94,6 +98,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\FinOperationListItem.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AddFinOperation.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

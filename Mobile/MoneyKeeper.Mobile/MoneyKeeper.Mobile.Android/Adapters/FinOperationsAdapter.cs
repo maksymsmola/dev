@@ -13,8 +13,6 @@ namespace MoneyKeeper.Mobile.Android.Adapters
         private readonly IList<FinOperation> list;
         private readonly LayoutInflater inflater;
 
-        private readonly int viewHolderTagKey = 1;
-
         public FinOperationsAdapter(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
         {
         }
