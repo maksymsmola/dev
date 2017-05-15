@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-
 using Android.App;
 using Android.Content;
+using Android.Net;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using ModernHttpClient;
 using MoneyKeeper.Mobile.Android.DataAccess;
+using MoneyKeeper.Mobile.Android.Exceptions;
 using Newtonsoft.Json;
 
-namespace MoneyKeeper.Mobile.Android
+namespace MoneyKeeper.Mobile.Android.Activities
 {
     [Activity(Label = "Добавить операцию")]
     public class AddFinOperationActivity : Activity
@@ -45,35 +42,24 @@ namespace MoneyKeeper.Mobile.Android
                 Type = this.GetFinOperationType()
             };
 
-            var httpClient = new HttpClient(new NativeMessageHandler());
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bareer", MoneyKeeperApp.Token);
+            var dataAccess = new DataAccessService((ConnectivityManager)this.GetSystemService(ConnectivityService));
 
-            using (httpClient)
+            try
             {
-                HttpResponseMessage response = httpClient.PostAsync(
-                        "http://10.0.2.2:54502/api/FinOperation",
-                        new StringContent(
-                            JsonConvert.SerializeObject(finOperation),
-                            Encoding.UTF8,
-                            "application/json"))
-                    .Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Database.AddFinOperation(JsonConvert.DeserializeObject<FinOperation>(response.Content.ReadAsStringAsync().Result));
-
-                    progress.Cancel();
-
-                    var intent = new Intent(this, typeof(FinOperationsListActivity));
-
-                    this.StartActivity(intent);
-                }
-                else
-                {
-                    progress.Cancel();
-                    Toast.MakeText(this, "Error occured while ading operation", ToastLength.Short).Show();
-                }
+                dataAccess.AddFinOperation(finOperation);
             }
+            catch (HttpRequestFailedException)
+            {
+                Toast.MakeText(this, "Error occured while ading operation", ToastLength.Short).Show();
+            }
+            finally
+            {
+                progress.Cancel();
+            }
+
+            var intent = new Intent(this, typeof(FinOperationsListActivity));
+
+            this.StartActivity(intent);
         }
 
         private FinOperationType GetFinOperationType()

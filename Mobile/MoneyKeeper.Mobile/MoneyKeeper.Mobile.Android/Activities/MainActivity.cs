@@ -1,17 +1,14 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using Android.App;
 using Android.Content;
-using Android.Widget;
 using Android.OS;
-using Android.Views;
+using Android.Widget;
 using ModernHttpClient;
 using MoneyKeeper.Mobile.Android.DataAccess;
 
-namespace MoneyKeeper.Mobile.Android
+namespace MoneyKeeper.Mobile.Android.Activities
 {
     [Activity(Label = "Вход", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity

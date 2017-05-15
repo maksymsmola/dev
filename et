@@ -1,0 +1,267 @@
+[33mcommit 2914bfe370d235632898cd7cdcd21fc4d887dab4[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Mon May 15 02:50:44 2017 +0300
+
+    Completed logic for crud in online mode
+
+[33mcommit 6c96f6f3b06e8efe280412e08b7044013f6ebac0[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun May 14 15:40:08 2017 +0300
+
+    Added logic for adding finOperatioin in Android app and synchronization logic
+
+[33mcommit 202f8509aee06323099b4be4f503b463fa618b9a[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat May 13 16:45:32 2017 +0300
+
+    Added basic login and finOperation list in mobile
+
+[33mcommit 93d61a8461b6e03bcfc01e982a3f86681dac9ef7[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Thu May 11 19:04:39 2017 +0300
+
+    Added basic elements for build automation
+
+[33mcommit bc7a8bb1cd36bd71c39d46f3f4dbe9050d6ae36a[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Thu May 11 15:37:37 2017 +0300
+
+    Finished backend for synchronization
+
+[33mcommit 91bfb37a7ba3f71af703e366f7d87ffe786569ab[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Thu May 11 13:20:51 2017 +0300
+
+    Completed BL for synchronization on server
+
+[33mcommit d478cd5d08187f0737c5b1141f7f97039d834435[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Thu May 11 02:16:50 2017 +0300
+
+    Added sketch of SyncService
+
+[33mcommit a70b54c16f9f3d823dea64a4c6bdc1d082405d8e[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Thu May 11 01:36:21 2017 +0300
+
+    Changed EntityState.Untouched to EntityState.Synchronized
+
+[33mcommit fed1a542a0ab1a27fe1494736ab5cbda1b6229be[m
+Merge: b3d2224 53d017a
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Wed May 10 18:34:45 2017 +0300
+
+    Merge branch 'master'
+
+[33mcommit 53d017a18ebb4b1ba3070d51a6361d5078a5cb9b[m
+Merge: ab92fb3 593b4c5
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Wed May 10 18:29:59 2017 +0300
+
+    Merge pull request #1 from maksymsmola/DataSyncMigration
+    
+    MIGRATION: added StatefulEntity
+
+[33mcommit 593b4c56cb1ad0e734cff0638795bc7a5e378cff[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Wed May 10 18:26:53 2017 +0300
+
+    MIGRATION: added StatefulEntity
+
+[33mcommit b3d2224007228db3d01610295467aca62ac45cf7[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Tue May 9 18:50:02 2017 +0300
+
+    Added basic android solution
+
+[33mcommit 5889f82594b76b8689c3ada217f3d13f20c6edf4[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Tue May 9 17:22:55 2017 +0300
+
+    Added basic mobile API with basic authentication
+
+[33mcommit ab92fb3d0f61a1aec5f4173654ed92703a5784d0[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun May 7 15:19:53 2017 +0300
+
+    Added displaying statistic feature
+
+[33mcommit 07e99649cec3bd0d4fe3ab4568dbf83f2d55bdb5[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Fri May 5 12:42:43 2017 +0300
+
+    Fixed encoding in Configuration.cs
+
+[33mcommit cb00e510fa9be7b233c9e9240386091c68f9c8ff[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Mar 12 13:05:01 2017 +0200
+
+    Finished filter history table feature
+
+[33mcommit 164366b9bbcecf30b0d724cb67549d2c163028ad[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Mar 11 14:03:23 2017 +0200
+
+    Added basic view for filter feature
+
+[33mcommit 706df2171408d290f18599e4fb7bff32f7fe16a5[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Mar 11 13:00:52 2017 +0200
+
+    Added BL for filter feature
+
+[33mcommit 4df48b602d3c52aa374f5bcffb5b2622f76a7235[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Mar 5 18:38:59 2017 +0200
+
+    Added edit fin op functionality
+
+[33mcommit 518fb71842a51e2ea264d8d10381747fbee1fc5f[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Feb 25 14:16:43 2017 +0200
+
+    Added delete fin operation functionality
+
+[33mcommit b13825aaed18bb0103d6afa5ce62cad8fb17980f[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Feb 25 13:43:54 2017 +0200
+
+    Added title, fin op amount
+
+[33mcommit 9f902d4b15f321a260fbb5549b632e3da44724f0[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Feb 25 12:17:48 2017 +0200
+
+    Modified gitignore
+
+[33mcommit 55d574f2293c74d75a3a383fbb801d189959b0ca[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Feb 25 12:11:39 2017 +0200
+
+    Changed DTO structure
+
+[33mcommit 0608d900436829f9139e506083136ae570be113f[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Fri Feb 17 00:08:11 2017 +0200
+
+    Added basic tags functionality
+
+[33mcommit a3661ffeac18857e6c1a49e0dd89885ddddf752a[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Feb 11 23:20:28 2017 +0200
+
+    Added category while adding finOp and localized calendar
+
+[33mcommit 2e68d75d12d0bdac4b2085525dc39aa4f66ebf22[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Feb 5 13:37:30 2017 +0200
+
+    Changed states structure
+
+[33mcommit 520d3a80144fd62a0b189400aaaf112be9f167c9[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Feb 4 13:24:31 2017 +0200
+
+    Added material table
+
+[33mcommit d2a8500e120c9c7397463f6714136478a52b147b[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Fri Feb 3 22:53:03 2017 +0200
+
+    Added logout
+
+[33mcommit 28f04e872f770de0410fdb9f3787d9bb64c41fdd[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Fri Feb 3 22:39:28 2017 +0200
+
+    Added rus encoding
+
+[33mcommit df423b3c2b0455423fa416c5d0f3eeae0ba58d54[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Jan 29 23:39:12 2017 +0200
+
+    Added functionality for add income\expense
+
+[33mcommit b9b7c49593b6e7fabc158df2124e70d6398d4eaf[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Jan 22 13:59:22 2017 +0200
+
+    Added operations list to history tab
+
+[33mcommit 8187bc97753cc99783e04d19b7a4212ebc3aebb2[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Jan 22 11:55:55 2017 +0200
+
+    Added basic home page sketch
+
+[33mcommit 414a3f018b766f43e4656069c6e25ffc2b0f4ce4[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Thu Jan 19 20:51:14 2017 +0200
+
+    Set specific version for angular packages
+
+[33mcommit 400cd8a21b82d251d1149710c381d4a18bd2ba0d[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Mon Jan 9 21:23:28 2017 +0200
+
+    Finished basic authorization
+
+[33mcommit 6363d168bf1a9c12050c15499eb043329f907dc9[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Jan 8 19:50:02 2017 +0200
+
+    Added String extensions
+
+[33mcommit 3151ac0d3ef2d326463c459848244f940431e776[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Jan 8 19:49:46 2017 +0200
+
+    Added Repository
+
+[33mcommit f99d46e849b3985b7d8b10fc2f41cc9e9b25dff7[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Mon Jan 2 22:31:42 2017 +0200
+
+    MIGRATION: Added LoginName for User
+
+[33mcommit 19b613a758118cdbe4194fd3d422b2896a1afd69[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Mon Jan 2 22:27:49 2017 +0200
+
+    Set up clien code and client login
+
+[33mcommit b673730e24023bd836eaff9f22179dddff28d32d[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Dec 24 14:05:28 2016 +0200
+
+    Configured DB
+
+[33mcommit 2055336354ecdecb327eba4f86f16ac3f2d71761[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sun Dec 18 17:45:16 2016 +0200
+
+    Added IocContainer
+
+[33mcommit 82853ad63841c45277d02cbad46d3d1c5396310e[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Dec 17 20:12:16 2016 +0200
+
+    Added Core project and DbContext
+
+[33mcommit 03495e078ae9679deb5cf766c8cfcf26af1e9dd7[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Dec 17 18:36:56 2016 +0200
+
+    Added elmah
+
+[33mcommit f9e4e59af5693bbbc3aabeb25a49591fed56ef18[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Dec 17 16:35:38 2016 +0200
+
+    Added basic solution template
+
+[33mcommit d089e5e617f82001ab2d7ba7bca44f21e25447d4[m
+Author: maksymsmola <maksym.smola@gmail.com>
+Date:   Sat Dec 17 16:28:44 2016 +0200
+
+    Added .ginignore file

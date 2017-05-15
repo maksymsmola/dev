@@ -49,7 +49,7 @@ namespace MoneyKeeper.Mobile.Android.Adapters
 
         public override long GetItemId(int position)
         {
-            return this.list[position].Id;
+            return this.list[position].LocalId;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)

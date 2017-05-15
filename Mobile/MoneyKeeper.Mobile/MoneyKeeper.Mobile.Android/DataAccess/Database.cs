@@ -64,6 +64,14 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
             }
         }
 
+        public static FinOperation GetByLocalId(long localId)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                return connection.Get<FinOperation>(localId);
+            }
+        }
+
         public static void AddFinOperation(FinOperation finOperation)
         {
             using (SQLiteConnection connection = CreateConnection())
@@ -76,14 +84,7 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
         {
             using (SQLiteConnection connection = CreateConnection())
             {
-                string query = $@"
-UPDATE FinOperation
-SET {nameof(FinOperation.Value)} = '{finOperation.Value}',
-        {nameof(FinOperation.Description)} = '{finOperation.Description}',
-        {nameof(FinOperation.Date)} = '{finOperation.Date:yyyy-MM-dd}'
-    WHERE {nameof(FinOperation.Id)} = {finOperation.Id};";
-
-                connection.Execute(query);
+                connection.Update(finOperation);
             }
         }
 
@@ -92,6 +93,14 @@ SET {nameof(FinOperation.Value)} = '{finOperation.Value}',
             using (SQLiteConnection connection = CreateConnection())
             {
                 connection.Execute($"DELETE FROM FinOperation WHERE Id = {id};");
+            }
+        }
+
+        public static void MarkAsDeletedFinOperation(long localId)
+        {
+            using (SQLiteConnection connection = CreateConnection())
+            {
+                connection.Execute($"UPDATE FinOperation SET {nameof(FinOperation.State)} = {EntityState.Deleted:D} WHERE Id = {localId};");
             }
         }
 
