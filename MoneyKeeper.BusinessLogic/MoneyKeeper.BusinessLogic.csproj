@@ -80,6 +80,7 @@
     <Compile Include="Specifications\FinOperationSpecs\FinOpTypeSpec.cs" />
     <Compile Include="Specifications\FinOperationSpecs\FinOpUserSpec.cs" />
     <Compile Include="Specifications\FinOperationSpecs\FinOpValueSpec.cs" />
+    <Compile Include="Specifications\NotDeletedEntitySpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoneyKeeper.Core\MoneyKeeper.Core.csproj">

@@ -55,7 +55,7 @@
             </md-input-container>
 
             <div class="buttons-wrapper">
-                <md-button class="md-raised md-primary" ng-disabled="addForm.$invalid" ng-click="addFinOpCtrl.crudType === finOpCrudType.add ? addFinOpCtrl.addFinOperation() : addFinOpCtrl.editFinOperation()">{{crudType === finOpCrudType.add ? "Добавить" : "Изменить"}}</md-button>
+                <md-button class="md-raised md-primary" ng-disabled="addForm.$invalid" ng-click="addFinOpCtrl.crudType === finOpCrudType.add ? addFinOpCtrl.addFinOperation() : addFinOpCtrl.editFinOperation()">{{addFinOpCtrl.crudType === finOpCrudType.add ? "Добавить" : "Изменить"}}</md-button>
                 <md-button class="md-raised" ng-click="addFinOpCtrl.cancel()">Отмена</md-button>
             </div>
         </form>

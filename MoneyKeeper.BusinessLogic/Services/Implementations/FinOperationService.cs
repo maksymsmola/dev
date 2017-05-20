@@ -5,6 +5,7 @@ using MoneyKeeper.BusinessLogic.Dto.FinancialOperation;
 using MoneyKeeper.BusinessLogic.Dto.Synchronization.FinOperation;
 using MoneyKeeper.BusinessLogic.Dto.Tags;
 using MoneyKeeper.BusinessLogic.Mappings;
+using MoneyKeeper.BusinessLogic.Specifications;
 using MoneyKeeper.BusinessLogic.Specifications.FinOperationSpecs;
 using MoneyKeeper.Core;
 using MoneyKeeper.Core.Entities;
@@ -23,8 +24,14 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
 
         public List<FinOperationListItemDto> GetAllForUser(long userId)
         {
+            Specification<FinancialOperation> specification
+                = new FinOpUserSpec(userId) & new NotDeletedEntitySpec<FinancialOperation>();
+
             return
-                this.repository.GetByCriteria<FinancialOperation>(finOp => finOp.UserId == userId)
+                this.repository.GetByCriteriaIncluding(
+                        specification.Predicate,
+                        finOp => finOp.Category,
+                        finOp => finOp.Tags)
                     .Select(finOp => finOp.ToFinOperationListItemDto())
                     .ToList();
         }
@@ -50,6 +57,7 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
             tags.AddRange(this.ExtractExistingTags(model.Tags));
 
             finOperation.Tags = tags;
+            finOperation.State = EntityState.Added;
 
             this.repository.AddRange(finOperation.Clone(model.Amount));
             this.repository.SaveChanges();
@@ -84,6 +92,9 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
                 targetFinOperation.Tags.Add(tag);
             }
 
+            targetFinOperation.State = targetFinOperation.State == EntityState.Synchronized
+                ? EntityState.Updated : targetFinOperation.State;
+
             this.repository.SaveChanges();
         }
 
@@ -91,10 +102,8 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
         {
             var finOperation = this.repository.FindById<FinancialOperation>(id);
 
-            finOperation.Tags.Clear();
-            finOperation.CategoryId = null;
+            finOperation.State = EntityState.Deleted;
 
-            this.repository.Delete(finOperation);
             this.repository.SaveChanges();
         }
 
@@ -132,6 +141,7 @@ namespace MoneyKeeper.BusinessLogic.Services.Implementations
         private Specification<FinancialOperation> CreateSpecFilter(FinOperationFilterDto filter)
         {
             return
+                new NotDeletedEntitySpec<FinancialOperation>() &
                 new FinOpUserSpec(filter.UserId) &
                 new FinOpTypeSpec(filter.Type) &
                 new FinOpValueSpec(filter.Value) &
