@@ -1,4 +1,5 @@
 ﻿using System;
+using SQLite.Net.Attributes;
 
 namespace MoneyKeeper.Mobile.Android.DataAccess
 {
@@ -6,7 +7,9 @@ namespace MoneyKeeper.Mobile.Android.DataAccess
     {
         public long Id { get; set; }
 
-        // todo: add internal primary key
+        [PrimaryKey]
+        [AutoIncrement]
+        public long LocalId { get; set; }
 
         public double Value { get; set; }
 

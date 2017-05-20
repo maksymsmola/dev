@@ -13,11 +13,12 @@ namespace MoneyKeeper.Mobile.Android
     {
         public static void Synchronize()
         {
-            SyncModel syncRequest = CreateSyncRequest();
-
-            SyncModel syncResponse = GetResponseFromServer(syncRequest);
-
-            UpdateClientDb(syncResponse);
+            using (var httpAccess = new HttpAccessService())
+            {
+                SyncModel syncRequest = CreateSyncRequest();
+                SyncModel syncResponse = httpAccess.SendSyncRequestAsync(syncRequest).Result;
+                UpdateClientDb(syncResponse);
+            }
         }
 
         private static SyncModel CreateSyncRequest()
@@ -30,25 +31,6 @@ namespace MoneyKeeper.Mobile.Android
                 AddedFinOperations = notSyncData.Where(x => x.State == EntityState.Added).ToList(),
                 UpdatedFinOperations = notSyncData.Where(x => x.State == EntityState.Updated).ToList()
             };
-        }
-
-        private static SyncModel GetResponseFromServer(SyncModel model)
-        {
-            var httpClient = new HttpClient(new NativeMessageHandler());
-
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bareer", MoneyKeeperApp.Token);
-
-            string requestBody = JsonConvert.SerializeObject(model);
-
-            var result = httpClient.PostAsync(
-                    "http://10.0.2.2:54502/api/sync",
-                    new StringContent(
-                        requestBody,
-                        Encoding.UTF8,
-                        "application/json"))
-                .Result;
-
-            return JsonConvert.DeserializeObject<SyncModel>(result.Content.ReadAsStringAsync().Result);
         }
 
         private static void UpdateClientDb(SyncModel model)
