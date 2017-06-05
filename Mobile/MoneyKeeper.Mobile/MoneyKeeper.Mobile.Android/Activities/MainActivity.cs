@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using Android.App;
 using Android.Content;
+using Android.Net;
 using Android.OS;
 using Android.Widget;
 using ModernHttpClient;
@@ -26,7 +27,7 @@ namespace MoneyKeeper.Mobile.Android.Activities
 
                 progress.Show();
 
-                SyncService.Synchronize();
+                this.SyncIfConnected();
 
                 progress.Cancel();
 
@@ -51,7 +52,7 @@ namespace MoneyKeeper.Mobile.Android.Activities
             var httpClient = new HttpClient(new NativeMessageHandler());
 
             var result = httpClient.PostAsync(
-                    "http://10.0.2.2:54502/api/signIn",
+                    "http://money-keeper-api.azurewebsites.net/api/signIn",
                     new StringContent(
                         $"{{\"userName\":\"{userName}\",\"password\":\"{password}\"}}",
                         Encoding.UTF8,
@@ -65,7 +66,7 @@ namespace MoneyKeeper.Mobile.Android.Activities
 
                 MoneyKeeperApp.Token = token;
 
-                SyncService.Synchronize();
+                this.SyncIfConnected();
 
                 progress.Cancel();
 
@@ -78,6 +79,15 @@ namespace MoneyKeeper.Mobile.Android.Activities
                 progress.Cancel();
 
                 Toast.MakeText(this, "Error occured while communication with server", ToastLength.Short).Show();
+            }
+        }
+
+        private void SyncIfConnected()
+        {
+            var cm = (ConnectivityManager)this.GetSystemService(ConnectivityService);
+            if (cm.ActiveNetworkInfo?.IsConnected ?? false)
+            {
+                SyncService.Synchronize();
             }
         }
     }

@@ -11,8 +11,8 @@ namespace MoneyKeeper.Mobile.Android
 {
     public class HttpAccessService : IDisposable
     {
-        private const string SYNC_BASE_URL = "http://10.0.2.2:54502/api/Sync";
-        private const string FIN_OPERATION_BASE_URL = "http://10.0.2.2:54502/api/FinOperation";
+        private const string SYNC_BASE_URL = "http://money-keeper-api.azurewebsites.net/api/Sync";
+        private const string FIN_OPERATION_BASE_URL = "http://money-keeper-api.azurewebsites.net/api/FinOperation";
         private readonly HttpClient httpClient;
 
         public HttpAccessService()
